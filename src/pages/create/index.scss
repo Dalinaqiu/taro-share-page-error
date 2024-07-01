@@ -1,0 +1,42 @@
+.create {
+  height: 90%;
+
+  >p {
+    font-size: 40px;
+    margin: 40px 0 20px 0;
+  }
+
+  .t-textarea {
+    border: 1px solid #dcdcdc;
+    height: 60%;
+    
+    .t-textarea__wrapper {
+      height: 100%;
+
+      textarea {
+        height: 100%;
+      }
+    }
+  }
+
+  &-content {
+    height: 80%;
+  }
+
+  &-change {
+    position: absolute;
+    bottom: 4rem;
+    right: 0;
+  }
+
+  &-footer {
+    position: absolute;
+    bottom: 40px;
+    width: 100%;
+    display: flex;
+
+    .t-button:first-child {
+      width: 40%;
+    }
+  }
+}

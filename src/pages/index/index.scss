@@ -1,0 +1,47 @@
+.home {
+  >p {
+    font-size: 40px;
+    margin: 40px 0 20px 0;
+  }
+
+  &-select {
+    display: flex;
+  }
+
+  &-book,
+  &-type,
+  &-world,
+  &-character {
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+  }
+
+
+  &-book,
+  &-type,
+  &-world {
+    width: 60%;
+  }
+
+  &-book {
+    margin-right: 10px;
+  }
+
+  &-character {
+    width: 32%;
+  }
+
+  &-button {
+    position: absolute;
+    bottom: 5%;
+    width: 95% !important;
+  }
+
+  .t-fab {
+    font-size: 40px;
+    right: 10% !important;
+    bottom: 20% !important;
+    padding: 1.5rem !important;
+    background-color: #507ecb !important;
+  }
+}
