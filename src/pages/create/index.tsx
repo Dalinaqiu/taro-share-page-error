@@ -2,14 +2,15 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 11:44:15
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-07-01 16:12:29
+ * @LastEditTime: 2024-07-02 10:31:28
  * @FilePath: /td-test/src/pages/create/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 
-import { View } from "@tarojs/components";
-import { Button, Textarea } from 'tdesign-mobile-react';
+import { View, Text } from "@tarojs/components";
+// import { Button } from 'tdesign-mobile-react';
 import Taro from "@tarojs/taro";
+import { AtButton } from 'taro-ui'
 import { useState } from "react";
 import BookReader from "@/components/book-reader";
 
@@ -39,40 +40,36 @@ export default () => {
   
   return (
     <View className={prefix}>
-      <p>穿越大纲</p>
+      <Text className={`${prefix}-p`}>
+        穿越大纲
+      </Text>
 
       <BookReader
         className={`${prefix}-content`}
         content={value}
       />
 
-      <Button
-        className={`${prefix}-change`}
-        icon={<Icon name="refresh" />}
-      >
-        换一个
-      </Button>
+      <View className={`${prefix}-change`}>
+        <AtButton
+          icon={<Icon name="refresh" />}
+        >
+          换一个
+        </AtButton>
+      </View>
       
-      <div className={`${prefix}-footer`}>
-        <Button
-          block
-          size="large"
-          shape="rectangle"
-          variant="outline"
+      <View className={`${prefix}-footer`}>
+        <AtButton
           onClick={back}
         >
           返回
-        </Button>
-        <Button
-          block
-          size="large"
-          shape="rectangle"
-          theme="primary" 
+        </AtButton>
+        <AtButton
+          type='primary'
           onClick={goDetail}
         >
           进入剧本
-        </Button>
-      </div>
+        </AtButton>
+      </View>
     </View>
   );
 }

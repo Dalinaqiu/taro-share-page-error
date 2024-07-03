@@ -2,10 +2,11 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 15:29:36
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-07-01 15:43:26
+ * @LastEditTime: 2024-07-02 16:00:01
  * @FilePath: /td-test/src/pages/detail/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
+import { View } from '@tarojs/components'
 import BookReader from '@/components/book-reader'
 import './index.scss'
 
@@ -13,7 +14,10 @@ const prefix = 'detail'
 
 const content = `## 第一回 灵根育孕源流出 心性修持大道生
 
+
 诗曰：
+
+
 
  
 
@@ -55,8 +59,8 @@ const content = `## 第一回 灵根育孕源流出 心性修持大道生
 
 export default () => {
   return (
-    <div className={`${prefix}`}>
+    <View className={`${prefix}`}>
       <BookReader isMarkdown content={content} />
-    </div>
+    </View>
   )
 }

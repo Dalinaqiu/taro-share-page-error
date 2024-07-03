@@ -30,4 +30,6 @@ declare module 'tdesign-mobile-react'
 
 declare module 'asy-typer-js'
 
+declare module 'taro-ui'
+
 

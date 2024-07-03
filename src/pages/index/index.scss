@@ -1,5 +1,11 @@
+@import "~taro-ui/dist/style/components/button.scss";
+
 .home {
-  >p {
+  overflow: hidden;
+  margin: 40px;
+
+  &-p {
+    display: block;
     font-size: 40px;
     margin: 40px 0 20px 0;
   }
@@ -13,7 +19,12 @@
   &-world,
   &-character {
     border: 1px solid #dcdcdc;
-    border-radius: 4px;
+    border-radius: 15px;
+    padding: 20px;
+
+    .item-content__info-title {
+      color: #dcdcdc;
+    }
   }
 
 
@@ -28,20 +39,24 @@
   }
 
   &-character {
-    width: 32%;
+    width: 25%;
   }
 
   &-button {
     position: absolute;
     bottom: 5%;
-    width: 95% !important;
+    width: 90%;
   }
 
-  .t-fab {
+  &-fab {
+    position: absolute;
+    right: 40px;
+    bottom: 200px;
     font-size: 40px;
-    right: 10% !important;
-    bottom: 20% !important;
-    padding: 1.5rem !important;
-    background-color: #507ecb !important;
+  }
+
+  .t-loading {
+    top: 50%;
+    text-align: center;
   }
 }

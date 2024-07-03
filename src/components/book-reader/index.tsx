@@ -2,11 +2,12 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 15:10:21
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-07-01 15:58:36
+ * @LastEditTime: 2024-07-02 10:46:19
  * @FilePath: /td-test/src/components/book-reader/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 import React, { useEffect, useState } from 'react'
+import { View, Text } from '@tarojs/components'
 import EasyTyper from 'easy-typer-js'
 import { marked } from "marked"
 
@@ -19,7 +20,7 @@ export default props => {
   const [value, setValue] = useState(props.content)
   const [typer, selectTyper] = useState({})
 
-  const initTyper = (str) => {
+  const initTyper = async (str) => {
     // 配置对象
     const obj = {
       output: '',
@@ -31,8 +32,9 @@ export default props => {
       backSpeed: 40,
       sentencePause: false
     }
+    const s = await marked(str)
     // 实例化
-    const typer = new EasyTyper(obj, str, completeAsentence, changeOutput)
+    const typer = new EasyTyper(obj, s, completeAsentence, changeOutput)
     selectTyper(typer)
   }
 
@@ -47,25 +49,17 @@ export default props => {
   }
 
   const getMarkdownText = () => {
-    if (props.isMarkdown) {
-      return { __html: marked(value || '') }
-    }
+    // return { __html: value || '' }
+    return { __html: marked(value || '') }
   }
 
   useEffect(() => {
-    if (!props.isMarkdown) {
-      initTyper(props.content)
-    }
-    console.log(props, 'props')
+    initTyper(props.content)
   }, [props.content])
   
   return (
-    <div className={`${prefix} ${props.className || ''}`}>
-      {
-        props.isMarkdown
-          ? <div dangerouslySetInnerHTML={getMarkdownText()} />
-          : value
-      }
-    </div>
+    <View className={`${prefix} ${props.className || ''}`}>
+      <View dangerouslySetInnerHTML={getMarkdownText()}></View>
+    </View>
   )
 }

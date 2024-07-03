@@ -1,42 +1,39 @@
+@import "~taro-ui/dist/style/components/button.scss";
+
 .create {
   height: 90%;
+  margin: 40px;
 
-  >p {
+  &-p {
+    display: block;
     font-size: 40px;
     margin: 40px 0 20px 0;
   }
 
-  .t-textarea {
-    border: 1px solid #dcdcdc;
-    height: 60%;
-    
-    .t-textarea__wrapper {
-      height: 100%;
-
-      textarea {
-        height: 100%;
-      }
-    }
-  }
-
   &-content {
-    height: 80%;
+    min-height: 1000px;
+    border-radius: 15px;
   }
 
   &-change {
     position: absolute;
-    bottom: 4rem;
-    right: 0;
+    bottom: 160px;
+    right: 5%;
   }
 
   &-footer {
     position: absolute;
     bottom: 40px;
-    width: 100%;
+    width: 90%;
     display: flex;
 
-    .t-button:first-child {
-      width: 40%;
+    .at-button:first-child {
+      width: 25%;
+      margin-right: 40px;
+    }
+
+    .at-button:last-child {
+      width: 70%;
     }
   }
 }
