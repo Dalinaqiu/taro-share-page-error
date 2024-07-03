@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 09:26:14
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-07-02 17:59:21
+ * @LastEditTime: 2024-07-03 16:25:29
  * @FilePath: /td-test/src/pages/index/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -12,104 +12,46 @@ import React, { useEffect, useState } from 'react';
 // import { Button, Cell, Picker, PickerItem, Loading } from 'tdesign-mobile-react';
 import { AtForm, AtButton, AtList, AtListItem, AtInput } from 'taro-ui'
 import Taro from '@tarojs/taro';
-import { getCross } from '@/utils/index'
+import { getCross, transParams } from '@/utils/index'
 
 import './index.scss'
+
+interface OptionsType {
+  label: string;
+  value: string | number;
+}
 
 const prefix = 'home'
 
 export default function Index() {
-
-  const [catagoryOptions, setCatagoryOptions] = useState([
-    {
-      label: '文学',
-      value: 1
-    }, {
-      label: '历史',
-      value: 2
-    }
-  ])
   
-  const [bookOptions, setBookOptions] = useState([
-    {
-      label: '战狼',
-      value: 1
-    }, {
-      label: '庆余年',
-      value: 2
-    }
-  ]);
-  const [charactersOptions, setCharacterOptions] = useState([
-    {
-      label: '冷锋',
-      value: 1
-    }, {
-      label: '庆帝',
-      value: 2
-    }
-  ]);
-  
-  const [typeOptions, setTypeoptions] = useState([
-    {
-      label: '恐怖',
-      value: 1
-    }, {
-      label: '玄幻',
-      value: 2
-    },
-    {
-      label: '奇幻',
-      value: 3
-    }, {
-      label: '武侠',
-      value: 4
-    }
-  ]);
+  const [bookOptions, setBookOptions] = useState<OptionsType[]>([]);
+  const [charactersOptions, setCharacterOptions] = useState<OptionsType[]>([]);
+  const [cross, setCross] = useState<OptionsType[]>([])
+  const [typeOptions, setTypeOptions] = useState<OptionsType[]>([]);
 
   const [state, setState] = useState({
     book: {
       visible: false,
-      value: [bookOptions[0].value],
+      value: [],
       label: ''
     },
     character: {
       visible: false,
-      value: [charactersOptions[0].value],
+      value: [],
       label: ''
     },
     world: {
       visible: false,
-      value: 1,
+      value: '',
       label: ''
     },
     type: {
       visible: false,
-      value: 1,
+      value: '',
       label: ''
     },
   })
-
-  const [loading, setLoading] = useState(true)
-
-  const setVisible = (key, val) => {
-    setState({
-      ...state,
-      [key]: {
-        visible: val
-      }
-    })
-  }
-
-  const setLabel = (key, val) => {
-    setState({
-      ...state,
-      [key]: {
-        label: val
-      }
-    })
-  }
-
-  const getLabel = (arr, val) => arr[val].label
 
   const getPickerLabel = (key, val) => {
     switch (key) {
@@ -117,16 +59,14 @@ export default function Index() {
       case 'character':
         return [bookOptions[val[0]].label, charactersOptions[val[1]].label]
       case 'world':
-        return bookOptions[val].label
+        return cross[val].label
       case 'type':
         return typeOptions[val].label
     }
   }
 
   const onConfirm = (e, key) => {
-    console.log(e, 'ee', key)
     const label = getPickerLabel(key, e.value) || ''
-    console.log(label, 'label')
     if (['book', 'character'].includes(key)) {
       setState({
         ...state,
@@ -154,11 +94,6 @@ export default function Index() {
     }
   }
 
-  useLoad(() => {
-    console.log('Page loaded.')
-    getCross().then(data => console.log(data))
-  })
-
   const onFabClick = () => {
     setState({
       ...state,
@@ -174,8 +109,8 @@ export default function Index() {
       },
       world: {
         ...state.world,
-        label: bookOptions[0].label,
-        value: bookOptions[0].value
+        label: cross[0].label,
+        value: cross[0].value
       },
       type: {
         ...state.type,
@@ -186,16 +121,51 @@ export default function Index() {
   }
 
   const onRedirect = () => {
+    const params = {
+      book: state.book.label,
+      name: state.character.label,
+      cross: state.world.label,
+      style: state.type.label,
+      uid: '123456'
+    }
     Taro.navigateTo({
-      url: '/pages/create/index',
+      url: `/pages/create/index?${transParams(params)}`,
     })
   }
 
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false)
-    }, 2000);
+  useLoad(() => {
+    getCross().then(d => {
+      console.log(d)
+      const {data} = d
+      setBookOptions(data.characters.map((item, index) => ({
+        ...item,
+        label: item.book,
+        value: index
+      })))
+      data.characters.length && setCharacterOptions(data.characters[0].name.map((item, index) => ({
+        label: item,
+        value: index
+      })))
+      setTypeOptions(data.style.map((item, index) => ({
+        label: item,
+        value: index
+      })))
+      setCross(data.cross.map((item, index) => ({
+        label: item,
+        value: index
+      })))
+    })
   })
+
+  // 模拟加载中...
+  useEffect(() => {
+    Taro.showLoading({
+      title: '加载中',
+    })
+    setTimeout(() => {
+      Taro.hideLoading()
+    }, 2000);
+  }, [])
 
   return (
     <View className={prefix}>
@@ -339,12 +309,14 @@ export default function Index() {
           </View>
         </View>
 
-        <Text className={`${prefix}-p`}>穿入的世界</Text>
+        <Text className={`${prefix}-p`}>
+          穿入的世界
+        </Text>
         <View className={`${prefix}-world`}>
           <Picker
             mode='selector'
             value={state.world.value}
-            range={bookOptions.map(item => item.label)}
+            range={cross.map(item => item.label)}
             onChange={e => onConfirm(e.detail, 'world')}
           >
             <AtList title='书名A' name='book'>
@@ -353,7 +325,9 @@ export default function Index() {
           </Picker>
         </View>
 
-        <Text className={`${prefix}-p`}>穿越画风</Text>
+        <Text className={`${prefix}-p`}>
+          穿越画风
+        </Text>
         <View className={`${prefix}-type`}>
           <Picker
             mode='selector'
