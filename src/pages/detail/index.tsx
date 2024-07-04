@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 15:29:36
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-07-04 15:23:54
+ * @LastEditTime: 2024-07-04 16:44:35
  * @FilePath: /td-test/src/pages/detail/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -17,7 +17,7 @@ const prefix = 'detail'
 
 export default () => {
   const [content, setContent] = useState('')
-  const router = getCurrentInstance()
+  const router = useRouter()
 
   useEffect(() => {
     const { outlineId, uid } = router?.params || {}
