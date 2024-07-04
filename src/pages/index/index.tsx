@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 09:26:14
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-07-04 16:22:49
+ * @LastEditTime: 2024-07-04 17:01:40
  * @FilePath: /td-test/src/pages/index/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -330,7 +330,7 @@ export default function Index() {
               onColumnChange={e => onColumnChange(e)}
             >
               <AtList title='书名A' name='book'>
-                <AtListItem title='请选择穿越的作品' extraText={state.book.label} />
+                <AtListItem title={state.book.label ? '' : '请选择穿越的作品'} extraText={state.book.label} />
               </AtList>
             </Picker>
           </View>
@@ -347,7 +347,7 @@ export default function Index() {
               onColumnChange={onColumnChange}
             >
               <AtList title='书名A' name='character'>
-                <AtListItem title='人物' extraText={state.character.label} />
+                <AtListItem title={state.character.label ? '' : '人物'} extraText={state.character.label} />
               </AtList>
             </Picker>
           </View>
@@ -364,7 +364,7 @@ export default function Index() {
             onChange={e => onConfirm(e.detail, 'world')}
           >
             <AtList title='书名A' name='book'>
-              <AtListItem title='请选择穿入的世界' extraText={state.world.label} />
+              <AtListItem title={state.world.label ? '' : '请选择穿入的世界'} extraText={state.world.label} />
             </AtList>
           </Picker>
         </View>
@@ -380,7 +380,7 @@ export default function Index() {
             onChange={e => onConfirm(e.detail, 'type')}
           >
             <AtList title='书名A' name='book'>
-              <AtListItem title='请选择穿越画风' extraText={state.type.label} />
+              <AtListItem title={state.type.label ? '' : '请选择穿越画风'} extraText={state.type.label} />
             </AtList>
           </Picker>
         </View>
