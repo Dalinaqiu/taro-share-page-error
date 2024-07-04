@@ -2,20 +2,19 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 11:44:15
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-07-03 16:01:30
+ * @LastEditTime: 2024-07-04 11:50:13
  * @FilePath: /td-test/src/pages/create/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 
 import { View, Text } from "@tarojs/components";
-import Taro, {useRouter, getCurrentInstance} from "@tarojs/taro";
+import Taro, {useRouter} from "@tarojs/taro";
 import { AtButton } from 'taro-ui'
 import { useEffect, useState } from "react";
 import BookReader from "@/components/book-reader";
 import { getOutline } from "@/utils/index";
 
 import './index.scss';
-import { Icon } from "tdesign-icons-react";
 
 const prefix = 'create';
 
@@ -74,10 +73,7 @@ export default () => {
       />
 
       <View className={`${prefix}-change`}>
-        <AtButton
-          icon={<Icon name="refresh" />}
-          onClick={getValue}
-        >
+        <AtButton onClick={getValue}>
           换一个
         </AtButton>
       </View>
