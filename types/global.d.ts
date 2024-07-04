@@ -32,4 +32,8 @@ declare module 'asy-typer-js'
 
 declare module 'taro-ui'
 
+declare module '@tarojs/*'
+
+declare module 'react'
+
 

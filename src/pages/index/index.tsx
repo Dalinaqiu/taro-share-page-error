@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 09:26:14
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-07-03 16:25:29
+ * @LastEditTime: 2024-07-04 11:02:01
  * @FilePath: /td-test/src/pages/index/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -19,6 +19,7 @@ import './index.scss'
 interface OptionsType {
   label: string;
   value: string | number;
+  name?: string[];
 }
 
 const prefix = 'home'
@@ -73,12 +74,12 @@ export default function Index() {
         book: {
           ...state.book,
           label: label[0],
-          value: e.detail
+          value: e.value
         },
         character: {
           ...state.character,
           label: label[1],
-          value: e.detail
+          value: e.value
         }
       })
     }
@@ -94,28 +95,48 @@ export default function Index() {
     }
   }
 
+  // 生成一个参数为n的函数，返回0 - n之间的随机数
+  const getRandom = n => {
+    const random = Math.floor(Math.random() * (n + 1));
+    return random;
+  }
+
   const onFabClick = () => {
+    const RandomIndex1 = getRandom(bookOptions.length - 1)
+
+    const TempCharacterOptions = bookOptions[RandomIndex1].name?.map((item, index) => ({
+      label: item,
+      value: index
+    })) || []
+
+    setCharacterOptions(TempCharacterOptions)
+  
+    const RandomIndex2 = getRandom(TempCharacterOptions.length - 1)
+
+    const RandomIndex3 = getRandom(cross.length - 1)
+    const RandomIndex4 = getRandom(typeOptions.length - 1)
+
     setState({
       ...state,
       book: {
         ...state.book,
-        label: bookOptions[0].label,
-        value: [bookOptions[0].value, charactersOptions[0].value]
+        label: bookOptions[RandomIndex1].label,
+        value: [bookOptions[RandomIndex1].value, TempCharacterOptions[RandomIndex2].value]
       },
       character: {
         ...state.character,
-        label: charactersOptions[0].label,
-        value: [bookOptions[0].value, charactersOptions[0].value]
+        label: TempCharacterOptions[RandomIndex2].label,
+        value: [bookOptions[RandomIndex1].value, TempCharacterOptions[RandomIndex2].value]
       },
       world: {
         ...state.world,
-        label: cross[0].label,
-        value: cross[0].value
+        label: cross[RandomIndex3].label,
+        value: cross[RandomIndex3].value
       },
       type: {
         ...state.type,
-        label: typeOptions[0].label,
-        value: typeOptions[0].value
+        label: typeOptions[RandomIndex4].label,
+        value: typeOptions[RandomIndex4].value
       }
     })
   }
@@ -133,9 +154,25 @@ export default function Index() {
     })
   }
 
+  const onColumnChange = e => {
+    const {detail} = e;
+    if (
+      detail?.column === 0
+      && detail?.value >= 0
+      && bookOptions[detail.value]
+      && bookOptions[detail.value].name
+    ) {
+      setCharacterOptions(bookOptions[detail.value].name?.map((item, index) => ({
+        label: item,
+        value: index
+      })) || [])
+
+      onConfirm({value: [detail.value, 0]}, 'book')
+    }
+  }
+
   useLoad(() => {
     getCross().then(d => {
-      console.log(d)
       const {data} = d
       setBookOptions(data.characters.map((item, index) => ({
         ...item,
@@ -285,9 +322,10 @@ export default function Index() {
                 charactersOptions.map(item => item.label)
               ]} 
               onChange={e => onConfirm(e.detail, 'book')}
+              onColumnChange={e => onColumnChange(e)}
             >
               <AtList title='书名A' name='book'>
-                <AtListItem title='请选择穿越的人物' extraText={state.book.label} />
+                <AtListItem title='请选择穿越的作品' extraText={state.book.label} />
               </AtList>
             </Picker>
           </View>
@@ -301,6 +339,7 @@ export default function Index() {
                 charactersOptions.map(item => item.label)
               ]}
               onChange={e => onConfirm(e.detail, 'character')}
+              onColumnChange={onColumnChange}
             >
               <AtList title='书名A' name='character'>
                 <AtListItem title='人物' extraText={state.character.label} />
