@@ -96,6 +96,17 @@ export default defineConfig(async (merge, { command, mode }) => {
       },
       webpackChain(chain) {
         chain.resolve.plugin('tsconfig-paths').use(TsconfigPathsPlugin)
+      },
+      devServer: {
+        proxy: {
+         '/hljb/api': {
+          target: 'http://10.18.33.99:8751', // 后端地址
+          changeOrigin: true,
+          pathRewrite: {
+            '^/hljb/api': ''
+           }
+          }
+        }
       }
     },
     rn: {

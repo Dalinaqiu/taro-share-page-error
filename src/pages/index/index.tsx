@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 09:26:14
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-07-04 11:02:01
+ * @LastEditTime: 2024-07-04 16:22:49
  * @FilePath: /td-test/src/pages/index/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -172,6 +172,9 @@ export default function Index() {
   }
 
   useLoad(() => {
+    Taro.showLoading({
+      title: '加载中',
+    })
     getCross().then(d => {
       const {data} = d
       setBookOptions(data.characters.map((item, index) => ({
@@ -191,18 +194,20 @@ export default function Index() {
         label: item,
         value: index
       })))
+    }).finally(() => {
+      Taro.hideLoading()
     })
   })
 
-  // 模拟加载中...
-  useEffect(() => {
-    Taro.showLoading({
-      title: '加载中',
-    })
-    setTimeout(() => {
-      Taro.hideLoading()
-    }, 2000);
-  }, [])
+  // // 模拟加载中...
+  // useEffect(() => {
+  //   Taro.showLoading({
+  //     title: '加载中',
+  //   })
+  //   setTimeout(() => {
+  //     Taro.hideLoading()
+  //   }, 2000);
+  // }, [])
 
   return (
     <View className={prefix}>
