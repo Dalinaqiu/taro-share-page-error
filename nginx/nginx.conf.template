@@ -55,7 +55,7 @@ http {
             add_header Access-Control-Allow-Methods 'GET,POST,PUT,DELETE,OPTIONS';
             add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';
             add_header Access-Control-Allow-Credentials: true;
-            root /opt/time-fox-fe;
+            root /opt/ai-writer;
             index index.html index.htm;
             try_files $uri $uri/ /index.html;
         }
