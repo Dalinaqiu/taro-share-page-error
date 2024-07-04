@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 15:29:36
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-07-04 16:44:35
+ * @LastEditTime: 2024-07-04 17:28:16
  * @FilePath: /td-test/src/pages/detail/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -28,10 +28,9 @@ export default () => {
       outline_id: parseInt(outlineId),
       uid,
     }).then(d => {
-      Taro.hideLoading()
       console.log(d, 'ddd')
       setContent(`${d.data.script}`)
-    })
+    }).finally(() => Taro.hideLoading())
   }, [])
   return (
     <View className={`${prefix}`}>

@@ -6,7 +6,7 @@ import prodConfig from './prod'
 // https://taro-docs.jd.com/docs/next/config#defineconfig-辅助函数
 export default defineConfig(async (merge, { command, mode }) => {
   const baseConfig: UserConfigExport = {
-    projectName: 'td-test',
+    projectName: 'ai-writer-miniprogram',
     date: '2024-7-1',
     designWidth: 750,
     deviceRatio: {
