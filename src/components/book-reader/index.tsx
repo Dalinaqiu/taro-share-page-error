@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 15:10:21
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-07-04 18:57:58
+ * @LastEditTime: 2024-07-05 10:06:31
  * @FilePath: /td-test/src/components/book-reader/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -54,7 +54,12 @@ export default props => {
   }
 
   useEffect(() => {
-    initTyper(props.content)
+    if (props.noTyper) {
+      setValue(props.content)
+    }
+    else {
+      initTyper(props.content)
+    }
   }, [props.content])
   
   return (
