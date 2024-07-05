@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 09:26:14
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-07-05 16:20:33
+ * @LastEditTime: 2024-07-05 17:04:56
  * @FilePath: /td-test/src/pages/index/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -91,7 +91,7 @@ export default function Index() {
         ...state,
         [key]: {
           label,
-          value: e.detail,
+          value: e.value,
           visible: false
         }
       })
@@ -266,108 +266,6 @@ export default function Index() {
 
   return (
     <View className={prefix}>
-      {/* {
-        loading
-          ? <Loading size="large" theme="spinner" text="加载中..." loading={loading} />
-          : (
-            <>
-              <p>穿越的人物</p>
-              <div className={`${prefix}-select`}>
-                <div className={`${prefix}-book`}>
-                  <Cell
-                    arrow
-                    title=""
-                    note={state.book.label || '选择书'}
-                    onClick={() => setVisible('book', true)}
-                  />
-                  <Picker
-                    visible={state.book.visible}
-                    defaultValue={state.book.value}
-                    value={state.book.value}
-                    onConfirm={e => onConfirm(e, 'book')}
-                    onCancel={() => setVisible('book', false)}
-                  >
-                    <PickerItem options={catagoryOptions} />
-                    <PickerItem options={bookOptions} />
-                  </Picker>
-                </div>
-
-                <div className={`${prefix}-character`}>
-                  <Cell
-                    arrow
-                    title=""
-                    note={state.character.label || '选择人物'}
-                    onClick={() => setVisible('character', true)}
-                  />
-                  <Picker
-                    visible={state.character.visible}
-                    defaultValue={state.character.value}
-                    value={state.character.value}
-                    onConfirm={e => onConfirm(e, 'character')}
-                    onCancel={() => setVisible('character', false)}
-                  >
-                    <PickerItem options={charactersOptions} />
-                  </Picker>
-                </div>
-              </div>
-              
-              <p>传入的世界</p>
-              <div className={`${prefix}-world`}>
-                <Cell
-                  arrow
-                  title=""
-                  note={state.world.label || '选择要穿越的世界'}
-                  onClick={() => setVisible('world', true)}
-                />
-                <Picker
-                  visible={state.world.visible}
-                  defaultValue={state.world.value}
-                  value={state.world.value}
-                  onConfirm={e => onConfirm(e, 'world')}
-                  onCancel={() => setVisible('world', false)}
-                >
-                  <PickerItem options={bookOptions} />
-                </Picker>
-              </div>
-
-              <p>穿越画风</p>
-              <div className={`${prefix}-type`}>
-                <Cell
-                  arrow
-                  title=""
-                  note={state.type.label || '穿越画风'}
-                  onClick={() => setVisible('type', true)}
-                />
-                <Picker
-                  visible={state.type.visible}
-                  defaultValue={[]}
-                  value={state.type.value}
-                  onConfirm={e => onConfirm(e, 'type')}
-                  onCancel={() => setVisible('type', false)}
-                >
-                  <PickerItem options={typeOptions} />
-                </Picker>
-              </div>
-
-              <Button
-                className={`${prefix}-fab`}
-                onClick={onFabClick}
-              >
-                随机匹配
-              </Button>
-
-              <Button
-                className={`${prefix}-button`}
-                block
-                size="large"
-                shape="rectangle"
-                onClick={onRedirect}
-              >
-                开始穿越
-              </Button>
-            </>
-          )
-      } */}
       <View className={`${prefix}-box`}>
         <Text className={`${prefix}-p`}>
           时空行者

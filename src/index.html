@@ -10,6 +10,24 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
   <title>td-test</title>
   <script><%= htmlWebpackPlugin.options.script %></script>
+  <script>
+    // 设置应用内字体不随微信浏览器设置字体大小而变化
+    (function() {
+    if (typeof WeixinJSBridge == "object" && typeof WeixinJSBridge.invoke == "function") {
+        handleFontSize();
+    } else {
+        document.addEventListener("WeixinJSBridgeReady", handleFontSize, false);
+    }
+    function handleFontSize() {
+        // 设置网页字体为默认大小
+        WeixinJSBridge.invoke('setFontSizeCallback', { 'fontSize' : 0 });
+        // 重写设置网页字体大小的事件
+        WeixinJSBridge.on('menu:setfont', function() {
+            WeixinJSBridge.invoke('setFontSizeCallback', { 'fontSize' : 0 });
+        });
+    }
+  })()
+  </script>
   
   <!-- <script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
   <script>
