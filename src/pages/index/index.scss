@@ -3,6 +3,14 @@
 .home {
   overflow: hidden;
   margin: 40px;
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  font-size: 32px;
+
+  &-box {
+    flex: 1;
+  }
 
   &-p {
     display: block;
@@ -43,20 +51,39 @@
   }
 
   &-button {
-    position: absolute;
-    bottom: 5%;
-    width: 90%;
+    // position: absolute;
+    // bottom: 5%;
+    // width: 90%;
   }
 
   &-fab {
-    position: absolute;
-    right: 40px;
-    bottom: 200px;
+    // position: absolute;
+    // right: 40px;
+    // bottom: 200px;
     font-size: 40px;
+    margin-bottom: 32px;
   }
 
   .t-loading {
     top: 50%;
     text-align: center;
   }
+}
+
+.home-book .item-content__info-title,
+.home-type .item-content__info-title,
+.home-world .item-content__info-title,
+.home-character .item-content__info-title {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.home-book .item-extra__info,
+.home-type .item-extra__info,
+.home-world .item-extra__info,
+.home-character .item-extra__info {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
