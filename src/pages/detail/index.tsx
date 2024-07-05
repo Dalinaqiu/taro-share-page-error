@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 15:29:36
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-07-05 00:57:01
+ * @LastEditTime: 2024-07-05 14:49:12
  * @FilePath: /td-test/src/pages/detail/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -22,8 +22,11 @@ export default () => {
   const router = useRouter()
 
   const goBack = () => {
-    Taro.navigateBack({
-      delta: 2
+    // Taro.navigateBack({
+    //   delta: 2
+    // })
+    Taro.navigateTo({
+      url: '/pages/index/index?back=detail',
     })
   }
 

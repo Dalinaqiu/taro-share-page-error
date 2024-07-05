@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 09:26:14
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-07-05 13:03:26
+ * @LastEditTime: 2024-07-05 14:55:59
  * @FilePath: /td-test/src/pages/index/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -13,6 +13,7 @@ import React, { useEffect, useState } from 'react';
 import { AtForm, AtButton, AtList, AtListItem, AtInput } from 'taro-ui'
 import Taro from '@tarojs/taro';
 import { getCross, transParams } from '@/utils/index'
+import { useRouter, getCurrentInstance } from '@tarojs/taro'
 
 import './index.scss'
 
@@ -53,6 +54,8 @@ export default function Index() {
       label: ''
     },
   })
+
+  const router = useRouter()
 
   const getPickerLabel = (key, val) => {
     switch (key) {
@@ -174,6 +177,7 @@ export default function Index() {
   }
 
   const onRedirect = async () => {
+    Taro.setStorage({key: 'pageState', data: state})
     const params = {
       book: state.book.label,
       name: state.character.label,
@@ -245,15 +249,15 @@ export default function Index() {
     })
   })
 
-  // // 模拟加载中...
-  // useEffect(() => {
-  //   Taro.showLoading({
-  //     title: '加载中',
-  //   })
-  //   setTimeout(() => {
-  //     Taro.hideLoading()
-  //   }, 2000);
-  // }, [])
+  useEffect(() => {
+    if (router.params?.back) {
+      const state = Taro.getStorageSync('pageState')
+      if (state) {
+        setState(state)
+        Taro.removeStorage({key: 'pageState'})
+      }
+    }
+  }, [router.params])
 
   return (
     <View className={prefix}>
