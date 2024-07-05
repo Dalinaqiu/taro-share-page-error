@@ -9,13 +9,14 @@
   font-size: 32px;
 
   &-box {
-    flex: 1;
+    // flex: 1;
   }
 
   &-p {
     display: block;
     font-size: 40px;
     margin: 40px 0 20px 0;
+    font-weight: 500;
   }
 
   &-select {
@@ -36,9 +37,7 @@
   }
 
 
-  &-book,
-  &-type,
-  &-world {
+  &-book {
     width: 60%;
   }
 
@@ -57,10 +56,10 @@
   }
 
   &-fab {
-    // position: absolute;
-    // right: 40px;
-    // bottom: 200px;
+    width: 30%;
+    flex: 1;
     font-size: 40px;
+    margin-top: 32px;
     margin-bottom: 32px;
   }
 

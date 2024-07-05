@@ -10,6 +10,7 @@
     display: block;
     font-size: 40px;
     margin: 40px 0 20px 0;
+    font-weight: 500;
   }
 
   &-content {
@@ -40,5 +41,15 @@
     .at-button:last-child {
       width: 90%;
     }
+  }
+
+  .at-button--primary {
+    color: #FFF;
+    border: 1PX solid #000000;
+    background: #000000;
+  }
+
+  .at-button--normal {
+    border-color: grey;
   }
 }

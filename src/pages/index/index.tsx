@@ -2,12 +2,12 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 09:26:14
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-07-05 14:55:59
+ * @LastEditTime: 2024-07-05 16:07:02
  * @FilePath: /td-test/src/pages/index/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 import { View, Picker, Text } from '@tarojs/components'
-import { useLoad } from '@tarojs/taro'
+import { useLoad, useUnload } from '@tarojs/taro'
 import React, { useEffect, useState } from 'react';
 // import { Button, Cell, Picker, PickerItem, Loading } from 'tdesign-mobile-react';
 import { AtForm, AtButton, AtList, AtListItem, AtInput } from 'taro-ui'
@@ -107,7 +107,7 @@ export default function Index() {
   const onFabClick = () => {
     const RandomIndex1 = getRandom(bookOptions.length - 1)
 
-    const TempCharacterOptions = bookOptions[RandomIndex1].name?.map((item, index) => ({
+    const TempCharacterOptions = bookOptions[RandomIndex1]?.name?.map((item, index) => ({
       label: item,
       value: index
     })) || []
@@ -147,28 +147,28 @@ export default function Index() {
   const validateParams = (p, cb) => {
     if (!p.book) {
       Taro.showToast({
-        title: '请选择穿越的作品和人物',
+        title: '请选择时空行者',
         icon: 'none'
       })
       return
     }
     if (!p.name) {
       Taro.showToast({
-        title: '请选择人物',
+        title: '请选择时空行者',
         icon: 'none'
       })
       return
     }
     if (!p.cross) {
       Taro.showToast({
-        title: '请选择要穿入的世界',
+        title: '请选择时空之门',
         icon: 'none'
       })
       return
     }
     if (!p.style) {
       Taro.showToast({
-        title: '请选择穿越画风',
+        title: '请选择时空轨迹',
         icon: 'none'
       })
       return
@@ -249,15 +249,19 @@ export default function Index() {
     })
   })
 
+  useUnload(() => {
+    console.log('useUnload')
+    // Taro.removeStorage({key: 'pageState'})
+  })
+
   useEffect(() => {
     if (router.params?.back) {
       const state = Taro.getStorageSync('pageState')
       if (state) {
         setState(state)
-        Taro.removeStorage({key: 'pageState'})
       }
     }
-  }, [router.params])
+  }, [])
 
   return (
     <View className={prefix}>
@@ -365,7 +369,7 @@ export default function Index() {
       } */}
       <View className={`${prefix}-box`}>
         <Text className={`${prefix}-p`}>
-          穿越的人物
+          时空行者
         </Text>
         <View className={`${prefix}-select`}>
           <View className={`${prefix}-book`}>
@@ -404,7 +408,7 @@ export default function Index() {
         </View>
 
         <Text className={`${prefix}-p`}>
-          穿入的世界
+          时空之门
         </Text>
         <View className={`${prefix}-world`}>
           <Picker
@@ -414,13 +418,13 @@ export default function Index() {
             onChange={e => onConfirm(e.detail, 'world')}
           >
             <AtList title='书名A' name='book'>
-              <AtListItem title={state.world.label ? '' : '请选择穿入的世界'} extraText={state.world.label} />
+              <AtListItem title={state.world.label ? '' : '请选择你想去的世界'} extraText={state.world.label} />
             </AtList>
           </Picker>
         </View>
 
         <Text className={`${prefix}-p`}>
-          穿越画风
+          时空轨迹
         </Text>
         <View className={`${prefix}-type`}>
           <Picker
@@ -430,7 +434,7 @@ export default function Index() {
             onChange={e => onConfirm(e.detail, 'type')}
           >
             <AtList title='书名A' name='book'>
-              <AtListItem title={state.type.label ? '' : '请选择穿越画风'} extraText={state.type.label} />
+              <AtListItem title={state.type.label ? '' : '你想来一场怎样的冒险'} extraText={state.type.label} />
             </AtList>
           </Picker>
         </View>
@@ -447,7 +451,7 @@ export default function Index() {
             type='primary'
             onClick={onRedirect}
           >
-            开始穿越
+            绘制穿越蓝图
           </AtButton>
         </View>
       

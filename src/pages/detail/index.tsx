@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 15:29:36
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-07-05 14:49:12
+ * @LastEditTime: 2024-07-05 16:00:18
  * @FilePath: /td-test/src/pages/detail/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -48,9 +48,10 @@ export default () => {
       <BookReader className={`${prefix}-content`} isMarkdown content={content} />
       <View>
         <AtButton
+            type="primary"
             onClick={goBack}
           >
-            返回
+            重启穿越之旅
           </AtButton>
         </View>
     </View>
