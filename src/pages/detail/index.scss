@@ -1,3 +1,12 @@
+@import "~taro-ui/dist/style/components/button.scss";
 .detail {
+  height: 90%;
   margin: 40px;
+  display: flex;
+  flex-direction: column;
+
+  &-content {
+    flex: 1;
+    margin-bottom: 32px;
+  }
 }

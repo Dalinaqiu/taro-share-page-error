@@ -3,6 +3,8 @@
 .create {
   height: 90%;
   margin: 40px;
+  display: flex;
+  flex-direction: column;
 
   &-p {
     display: block;
@@ -11,20 +13,23 @@
   }
 
   &-content {
+    flex: 1;
     min-height: 65%;
     border-radius: 15px;
+    margin-bottom: 32px;
   }
 
   &-change {
-    position: absolute;
-    bottom: 160px;
-    right: 5%;
+    // position: absolute;
+    // bottom: 160px;
+    // right: 5%;
+    margin-bottom: 32px;
   }
 
   &-footer {
-    position: absolute;
-    bottom: 40px;
-    width: 90%;
+    // position: absolute;
+    // bottom: 40px;
+    width: 100%;
     display: flex;
 
     .at-button:first-child {
@@ -33,7 +38,7 @@
     }
 
     .at-button:last-child {
-      width: 70%;
+      width: 90%;
     }
   }
 }

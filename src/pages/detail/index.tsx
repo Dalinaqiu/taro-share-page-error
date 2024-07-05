@@ -2,22 +2,30 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 15:29:36
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-07-04 17:28:16
+ * @LastEditTime: 2024-07-05 00:57:01
  * @FilePath: /td-test/src/pages/detail/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 import { View } from '@tarojs/components'
 import BookReader from '@/components/book-reader'
 import { useRouter, getCurrentInstance } from '@tarojs/taro'
+import { AtButton } from 'taro-ui';
 import { getScript } from "@/utils/index";
 import { useEffect, useState } from 'react'
 import Taro from '@tarojs/taro';
 import './index.scss'
+
 const prefix = 'detail'
 
 export default () => {
   const [content, setContent] = useState('')
   const router = useRouter()
+
+  const goBack = () => {
+    Taro.navigateBack({
+      delta: 2
+    })
+  }
 
   useEffect(() => {
     const { outlineId, uid } = router?.params || {}
@@ -34,7 +42,14 @@ export default () => {
   }, [])
   return (
     <View className={`${prefix}`}>
-      <BookReader isMarkdown content={content} />
+      <BookReader className={`${prefix}-content`} isMarkdown content={content} />
+      <View>
+        <AtButton
+            onClick={goBack}
+          >
+            返回
+          </AtButton>
+        </View>
     </View>
   )
 }

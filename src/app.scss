@@ -1,3 +1,13 @@
 #app {
   width: auto !important;
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.weui-picker__action {
+  font-size: 36px;
+}
+
+.weui-picker__item {
+  font-size: 30px;
 }
