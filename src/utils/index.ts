@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-02 17:47:47
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-07-03 15:05:38
+ * @LastEditTime: 2024-07-05 11:31:14
  * @FilePath: /td-test/src/utils/index.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -18,7 +18,7 @@ export const transParams = (params) => {
 }
 
 const handleResponse = res => {
-  if (res.status === 200) {
+  if (res.status === 200 && res.data.code === 0) {
     return res.data
   }
   else {
