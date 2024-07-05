@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 09:26:14
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-07-05 10:47:40
+ * @LastEditTime: 2024-07-05 13:03:26
  * @FilePath: /td-test/src/pages/index/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -141,7 +141,39 @@ export default function Index() {
     })
   }
 
-  const onRedirect = () => {
+  const validateParams = (p, cb) => {
+    if (!p.book) {
+      Taro.showToast({
+        title: '请选择穿越的作品和人物',
+        icon: 'none'
+      })
+      return
+    }
+    if (!p.name) {
+      Taro.showToast({
+        title: '请选择人物',
+        icon: 'none'
+      })
+      return
+    }
+    if (!p.cross) {
+      Taro.showToast({
+        title: '请选择要穿入的世界',
+        icon: 'none'
+      })
+      return
+    }
+    if (!p.style) {
+      Taro.showToast({
+        title: '请选择穿越画风',
+        icon: 'none'
+      })
+      return
+    }
+    cb()
+  }
+
+  const onRedirect = async () => {
     const params = {
       book: state.book.label,
       name: state.character.label,
@@ -149,8 +181,10 @@ export default function Index() {
       style: state.type.label,
       uid: '123456'
     }
-    Taro.navigateTo({
-      url: `/pages/create/index?${transParams(params)}`,
+    validateParams(params, () => {
+      return Taro.navigateTo({
+        url: `/pages/outline/index?${transParams(params)}`,
+      })
     })
   }
 
