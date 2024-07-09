@@ -2,18 +2,19 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 09:26:14
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-07-05 17:04:56
+ * @LastEditTime: 2024-07-09 16:39:40
  * @FilePath: /td-test/src/pages/index/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 import { View, Picker, Text } from '@tarojs/components'
-import { useLoad, useUnload } from '@tarojs/taro'
+import { useLoad, useShareAppMessage, useShareTimeline, useUnload } from '@tarojs/taro'
 import React, { useEffect, useState } from 'react';
 // import { Button, Cell, Picker, PickerItem, Loading } from 'tdesign-mobile-react';
 import { AtForm, AtButton, AtList, AtListItem, AtInput } from 'taro-ui'
 import Taro from '@tarojs/taro';
 import { getCross, transParams } from '@/utils/index'
 import { useRouter, getCurrentInstance } from '@tarojs/taro'
+import { request, wx_request } from '../../utils/request.js'
 
 import './index.scss'
 
@@ -57,6 +58,28 @@ export default function Index() {
 
   const router = useRouter()
 
+  useShareAppMessage((res) => {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '',
+      path: '/page/index/index',
+    }
+  })
+
+  useShareTimeline((res) => {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '',
+      path: '/page/index/index',
+    }
+  })
+
   const getPickerLabel = (key, val) => {
     switch (key) {
       case 'book':
@@ -96,6 +119,41 @@ export default function Index() {
         }
       })
     }
+  }
+
+  const getUserIdentity = () => {
+    Taro.login({
+      success(res) {
+        if (res.code) {
+          const params = {
+            jsCode: res.code,
+          }
+          request({
+            url: '/submit/wechat/getUserInfo',
+            payload: params,
+            method: 'POST',
+            success: (res) => {
+              // 将 openid 存储起来
+              Taro.setStorageSync('identityInfo', {
+                openid: res?.data?.openid,
+                unionid: res?.data?.unionid,
+              })
+
+              // 小程序激活时上报，确保动态参数成功获取后再触发上报
+              // wx_request({
+              //   url: genReportUrl('/count/lp', 7),
+              //   method: 'GET',
+              //   fail: (res) => {
+              //     console.log('小程序激活时上报fail', res)
+              //   },
+              // })
+            },
+          })
+        } else {
+          console.log('登录失败', res.errMsg)
+        }
+      },
+    })
   }
 
   // 生成一个参数为n的函数，返回0 - n之间的随机数
@@ -178,12 +236,13 @@ export default function Index() {
 
   const onRedirect = async () => {
     Taro.setStorage({key: 'pageState', data: state})
+    const openid = Taro.getStorageSync('identityInfo')?.openid
     const params = {
       book: state.book.label,
       name: state.character.label,
       cross: state.world.label,
       style: state.type.label,
-      uid: '123456'
+      uid: openid || '123456'
     }
     validateParams(params, () => {
       return Taro.navigateTo({
@@ -247,6 +306,8 @@ export default function Index() {
     }).finally(() => {
       Taro.hideLoading()
     })
+
+    Taro.getEnv() === Taro.ENV_TYPE.WEAPP && getUserIdentity()
   })
 
   useUnload(() => {

@@ -1,0 +1,23 @@
+.add-fans {
+  /* border: 1px solid red; */
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url(https://fe-res.go.sohu.com/website-building/miniprogram/bg-consult.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  position: relative;
+}
+.add-fans .add-btn {
+  width: 320px;
+  height: 108px;
+  color: #fff;
+  font-size: 40px;
+  padding-top: 28px;
+  position: absolute;
+  bottom: 10%;
+  background: url(https://fe-res.go.sohu.com/website-building/miniprogram/bg-consult-add-btn.png) no-repeat;
+  background-size: 100% 100%;
+}

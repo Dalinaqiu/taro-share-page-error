@@ -57,6 +57,7 @@
     "@tarojs/runtime": "3.6.32",
     "@tarojs/shared": "3.6.32",
     "@tarojs/taro": "3.6.32",
+    "@tarojs/with-weapp": "^3.6.33",
     "axios": "^1.7.2",
     "easy-typer-js": "^2.1.0",
     "marked": "^13.0.1",
