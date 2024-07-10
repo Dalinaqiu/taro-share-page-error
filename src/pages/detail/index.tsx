@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 15:29:36
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-07-09 16:40:02
+ * @LastEditTime: 2024-07-10 16:16:14
  * @FilePath: /td-test/src/pages/detail/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -22,24 +22,26 @@ export default () => {
   const router = useRouter()
 
   useShareAppMessage((res) => {
+    const { outlineId = '', uid = '' } = router?.params || {}
     if (res.from === 'button') {
       // 来自页面内转发按钮
       console.log(res.target)
     }
     return {
       title: '',
-      path: '/page/detail/index',
+      path: `/pages/detail/index?outlineId=${outlineId}&uid=${uid}&type=share`,
     }
   })
 
   useShareTimeline((res) => {
+    const { outlineId = '', uid = '' } = router?.params || {}
     if (res.from === 'button') {
       // 来自页面内转发按钮
       console.log(res.target)
     }
     return {
       title: '',
-      path: '/page/index/index',
+      path: `/pages/detail/index?outlineId=${outlineId}&uid=${uid}&type=share`,
     }
   })
 
@@ -61,7 +63,7 @@ export default () => {
   }
 
   useEffect(() => {
-    const { outlineId, uid } = router?.params || {}
+    const { outlineId, uid, type = '' } = router?.params || {}
     Taro.showLoading({
       title: '加载中',
     })
@@ -73,9 +75,16 @@ export default () => {
       setContent(`${d.data.script}`)
     }).finally(() => Taro.hideLoading())
   }, [])
+  
   return (
     <View className={`${prefix}`}>
-      <BookReader className={`${prefix}-content`} isMarkdown content={content} />
+      
+      <BookReader
+        isMarkdown
+        className={`${prefix}-content`}
+        content={content}
+      />
+      
       <View className={`${prefix}-btn`}>
         {
           Taro.getEnv() === Taro.ENV_TYPE.WEAPP
