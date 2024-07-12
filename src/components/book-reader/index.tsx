@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 15:10:21
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-07-10 17:55:38
+ * @LastEditTime: 2024-07-12 10:15:01
  * @FilePath: /td-test/src/components/book-reader/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -21,6 +21,11 @@ export default props => {
   const [value, setValue] = useState(props.content)
   const [typer, selectTyper] = useState({})
 
+  // 将 &quot; 替换为 "
+  const strTransform = (str) => {
+    return str.replace(/&quot;/g, '"')
+  }
+
   const initTyper = async (str) => {
     // 配置对象
     const obj = {
@@ -33,7 +38,8 @@ export default props => {
       backSpeed: 20,
       sentencePause: false
     }
-    const s = await marked(str || '')
+    let s = await marked(str || '')
+    s = strTransform(s)
     // 实例化
     const typer = new EasyTyper(obj, s, completeAsentence, changeOutput)
     selectTyper(typer)
@@ -51,7 +57,7 @@ export default props => {
 
   const getMarkdownText = () => {
     // return { __html: value || '' }
-    return { __html: marked(value || '') }
+    return { __html: strTransform(marked(value || '')) }
   }
 
   useEffect(() => {

@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 09:26:14
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-07-09 16:39:40
+ * @LastEditTime: 2024-07-12 11:34:54
  * @FilePath: /td-test/src/pages/index/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -65,7 +65,7 @@ export default function Index() {
     }
     return {
       title: '',
-      path: '/page/index/index',
+      path: '/pages/index/index',
     }
   })
 
@@ -76,7 +76,7 @@ export default function Index() {
     }
     return {
       title: '',
-      path: '/page/index/index',
+      path: '/pages/index/index',
     }
   })
 
@@ -320,7 +320,9 @@ export default function Index() {
       const state = Taro.getStorageSync('pageState')
       if (state) {
         setState(state)
-        Taro.removeStorage({key: 'pageState'})
+        if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
+          Taro.removeStorage({key: 'pageState'})
+        }
       }
     }
   }, [])
