@@ -1,3 +1,11 @@
+/*
+ * @Author: liqiu qiuli@sohu-inc.com
+ * @Date: 2024-07-08 17:02:38
+ * @LastEditors: liqiu qiuli@sohu-inc.com
+ * @LastEditTime: 2024-07-15 14:22:40
+ * @FilePath: /ai-writer-miniprogram/src/pages/consult/index.js
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import withWeapp, { cacheOptions } from '@tarojs/with-weapp'
 import { Block, View, Button } from '@tarojs/components'
 import React from 'react'
@@ -76,12 +84,13 @@ cacheOptions.setOptionsToCache({
 class _C extends React.Component {
   render() {
     const { sendMessageTitle, sendMessageImg, queryStrInfo } = this.data
+    const str = queryStrInfo.slice(14)
     return (
       <View className="add-fans">
         <Button
           openType="contact"
           showMessageCard="true"
-          sendMessagePath
+          sendMessagePath={str}
           sendMessageTitle={sendMessageTitle}
           sendMessageImg={sendMessageImg}
           sessionFrom={queryStrInfo}
