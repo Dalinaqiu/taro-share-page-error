@@ -1,0 +1,91 @@
+@import "~taro-ui/dist/style/components/button.scss";
+
+.home {
+  overflow: hidden;
+  margin: 40px;
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  font-size: 32px;
+
+  &-box {
+    // flex: 1;
+  }
+
+  &-p {
+    display: block;
+    font-size: 40px;
+    margin: 40px 0 20px 0;
+    font-weight: 500;
+  }
+
+  &-select {
+    display: flex;
+  }
+
+  &-book,
+  &-cross,
+  &-style,
+  &-characters,
+  &-auto-select {
+    border: 1px solid #dcdcdc;
+    border-radius: 15px;
+    padding: 20px;
+
+    .item-content__info-title {
+      color: #dcdcdc;
+    }
+  }
+
+
+  &-book {
+    // width: 60%;
+  }
+
+  &-book {
+    margin-right: 10px;
+  }
+
+  &-characters {
+    // width: 25%;
+  }
+
+  &-button {
+    // position: absolute;
+    // bottom: 5%;
+    // width: 90%;
+  }
+
+  &-fab {
+    width: 30%;
+    flex: 1;
+    font-size: 40px;
+    margin-top: 32px;
+    margin-bottom: 32px;
+  }
+
+  .t-loading {
+    top: 50%;
+    text-align: center;
+  }
+}
+
+.home-book .item-content__info-title,
+.home-cross .item-content__info-title,
+.home-style .item-content__info-title,
+.home-characters .item-content__info-title,
+.home-auto-select .item-content__info-title {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.home-book .item-extra__info,
+.home-cross .item-extra__info,
+.home-style .item-extra__info,
+.home-characters .item-extra__info,
+.home-auto-select .item-extra__info {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

@@ -21,4 +21,24 @@
       flex: 1;
     }
   }
+
+  .poster-share__content {
+    // position: absolute;
+    // right: -9999px;
+    // top: -9999px;
+    // width: 560px;
+    // height: 852px;
+    // opacity: 0;
+    // z-index: -1;
+  
+    &--img {
+      width: 100%;
+      height: 100%;
+    }
+  
+    &--cvs {
+      width: 100%;
+      height: 100%;
+    }
+  }
 }

@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 11:44:15
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-07-11 20:30:30
+ * @LastEditTime: 2024-07-26 14:05:51
  * @FilePath: /td-test/src/pages/outline/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -53,13 +53,7 @@ export default () => {
     Taro.showLoading({
       title: '加载中',
     })
-    getOutline({
-      book: decodeURIComponent(params?.book || ''),
-      name: decodeURIComponent(params?.name || ''),
-      cross: decodeURIComponent(params?.cross || ''),
-      style: decodeURIComponent(params?.style || ''),
-      uid: params?.uid || '123456'
-    }).then(d => {
+    getOutline({...params}).then(d => {
       setOutlineId(d.data.id)
       setValue(d.data.outline)
     }).finally(() => Taro.hideLoading())
