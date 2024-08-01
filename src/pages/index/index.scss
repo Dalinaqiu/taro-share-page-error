@@ -1,7 +1,8 @@
 @import "~taro-ui/dist/style/components/button.scss";
 
 .home {
-  overflow: hidden;
+  // overflow: hidden;
+  overflow-y: auto;
   margin: 40px;
   display: flex;
   flex-direction: column;
@@ -24,9 +25,10 @@
   }
 
   &-book,
-  &-type,
-  &-world,
-  &-character {
+  &-cross,
+  &-style,
+  &-characters,
+  &-auto-select {
     border: 1px solid #dcdcdc;
     border-radius: 15px;
     padding: 20px;
@@ -38,15 +40,15 @@
 
 
   &-book {
-    width: 60%;
+    // width: 60%;
   }
 
   &-book {
     margin-right: 10px;
   }
 
-  &-character {
-    width: 25%;
+  &-characters {
+    // width: 25%;
   }
 
   &-button {
@@ -70,18 +72,20 @@
 }
 
 .home-book .item-content__info-title,
-.home-type .item-content__info-title,
-.home-world .item-content__info-title,
-.home-character .item-content__info-title {
+.home-cross .item-content__info-title,
+.home-style .item-content__info-title,
+.home-characters .item-content__info-title,
+.home-auto-select .item-content__info-title {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 }
 
 .home-book .item-extra__info,
-.home-type .item-extra__info,
-.home-world .item-extra__info,
-.home-character .item-extra__info {
+.home-cross .item-extra__info,
+.home-style .item-extra__info,
+.home-characters .item-extra__info,
+.home-auto-select .item-extra__info {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
