@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 11:44:15
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-08-01 11:20:40
+ * @LastEditTime: 2024-08-06 15:00:23
  * @FilePath: /td-test/src/pages/outline/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -55,6 +55,7 @@ export default () => {
     }
   ]
 
+  // 获取上报接口参数
   const getReportParam = () => {
     const obj = {}
     const templateData = Taro.getStorageSync('pageState')
@@ -64,8 +65,9 @@ export default () => {
     return obj
   }
 
+  // 上报接口
   const domReport = (d) => {
-    const use_id = Taro.getStorageSync('identityInfo')?.openid
+    const use_id = Taro.getStorageSync('identityInfo')?.openid || router?.params?.uid
     const info = Taro.getSystemInfoSync()
     report({
       ...d,
@@ -115,40 +117,6 @@ export default () => {
     }
   })
 
-  useShareTimeline((res) => {
-    const { uid = '' } = router?.params || {}
-    const title = getTitle()
-
-    if (res.from === 'button') {
-      // 来自页面内转发按钮
-      console.log(res.target)
-      refreshCount({outline_id: outlineId, uid: uid})
-    }
-
-    if (isShowToast) {
-      setTimeout(() => {
-        Taro.showToast({
-          title: `分享成功，获得${count}次穿越机会`,
-          icon: 'none',
-        })
-        setIsShowToast(false)
-      }, 1000)
-    }
-
-    const obj = getReportParam()
-    domReport({
-      event: 'Click',
-      button_name: '分享到微信',
-      outline_content: value,
-      ...obj,
-    })
-    return {
-      title: SHARE_TITLE,
-      path: `/pages/index/index?outlineId=${outlineId}&uid=${uid}&type=share`,
-      imageUrl: BackgroundImg
-    }
-  })
-
   const back = () => {
     const obj = getReportParam()
     domReport({
@@ -172,6 +140,9 @@ export default () => {
 
   const goDetail = () => {
     const use_id = Taro.getStorageSync('identityInfo')?.openid
+    if (!use_id || !outlineId) {
+      return
+    }
     checkScript({
       outline_id: outlineId,
       uid: use_id
@@ -214,7 +185,12 @@ export default () => {
 
     // console.log(router?.params, 'params')
     // console.log(decodeURIComponent(router?.params?.book || ''), 'query')
-    const params = router?.params || {};
+    const params = router?.params.uid
+      ? router?.params 
+      : {
+          ...getReportParam(),
+          uid: Taro.getStorageSync('identityInfo')?.openid
+        };
     Taro.showLoading({
       title: '加载中',
     })
@@ -238,11 +214,20 @@ export default () => {
   }
 
   useEffect(() => {
-    getValue()
-    domReport({
-      event: 'PageView',
-      page_name: '大纲生成页'
-    })
+    console.log(router?.params, 'router?.params====>')
+    if (router?.params.from) {
+      Taro.navigateTo({
+        url: `/pages/index/index?type=share`,
+      })
+    }
+    else {
+      getValue()
+      domReport({
+        event: 'PageView',
+        page_name: '大纲生成页'
+      })
+    }
+    
   }, [])
 
   // useDidHide(() => {

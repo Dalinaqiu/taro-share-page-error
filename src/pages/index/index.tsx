@@ -28,6 +28,7 @@ export default function Index() {
 
   const router = useRouter()
 
+  // 分享好友回调
   useShareAppMessage((res) => {
     if (res.from === 'button') {
       // 来自页面内转发按钮
@@ -40,6 +41,7 @@ export default function Index() {
     }
   })
 
+  // 分享朋友圈回调
   useShareTimeline((res) => {
     if (res.from === 'button') {
       // 来自页面内转发按钮
@@ -52,6 +54,7 @@ export default function Index() {
     }
   })
 
+  // 表单确认事件
   const onConfirm = (e, key, config) => {
     switch (config.form) {
       case 'input': {
@@ -92,6 +95,7 @@ export default function Index() {
     setTemplateData({...templateData})
   }
 
+  // 获取用户登录信息
   const getUserIdentity = () => {
     Taro.login({
       success(res) {
@@ -134,6 +138,7 @@ export default function Index() {
     return random;
   }
 
+  // 随机生成
   const onFabClick = () => {
     if (templateData) {
       const obj = {}
@@ -170,6 +175,7 @@ export default function Index() {
     setTemplateData({...templateData})
   }
 
+  // 前端校验参数
   const validateParams = (p, cb) => {
     let hasError = false;
     Object.keys(templateConfig).forEach(key => {
@@ -191,6 +197,7 @@ export default function Index() {
     cb()
   }
 
+  // 绘制穿越蓝图
   const onRedirect = async () => {
     console.log(templateData, 'templateData')
     Taro.setStorage({key: 'pageState', data: templateData})
@@ -219,6 +226,7 @@ export default function Index() {
     })
   }
 
+  // 双列选择器左列change事件
   const onColumnChange = (detail, key, config) => {
     if (detail.column === 0) {
       templateData[key].value = detail.value
@@ -228,6 +236,7 @@ export default function Index() {
     }
   }
 
+  // 埋点上报
   const domReport = (d) => {
     const use_id = Taro.getStorageSync('identityInfo')?.openid
     const info = Taro.getSystemInfoSync()
@@ -239,6 +248,7 @@ export default function Index() {
     })
   }
 
+  // 初始化templateData
   const initTemplateData = (data) => {
     const obj = {}
     Object.keys(data).forEach(key => {
@@ -279,7 +289,7 @@ export default function Index() {
     Taro.showLoading({
       title: '加载中',
     })
-    getCross().then(d => {
+    getCross().then(d => { // 获取动态表单数据
       const {data} = d
       setTemplateConfig(data)
       initTemplateData(data)
@@ -313,7 +323,7 @@ export default function Index() {
   // })
 
   useEffect(() => {
-    if (router.params?.back && router.params?.type !== 'share') {
+    if (router.params?.back && router.params?.type !== 'share') { // 非分享页回来内容回显
       const state = Taro.getStorageSync('pageState')
       if (state) {
         // setState(state)
@@ -325,6 +335,7 @@ export default function Index() {
     }
   }, [])
 
+  // 渲染动态表单子项，TODO: 优化,后续封装到@/components/render-item组件中
   const renderItem = (key, config) => {
     if (config.form === 'select') {
       const range = config.options.map(item => item.label)
@@ -422,6 +433,7 @@ export default function Index() {
     }
   }
 
+  // 渲染动态表单
   const renderTpl = () => {
     return Object.keys(templateConfig).sort((a, b) => templateConfig[a].order - templateConfig[b].order).map(key => {
       if (templateConfig[key]) {

@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 15:29:36
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-08-01 11:09:08
+ * @LastEditTime: 2024-08-01 17:55:51
  * @FilePath: /td-test/src/pages/detail/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -36,7 +36,7 @@ export default () => {
   }
 
   const domReport = (d) => {
-    const use_id = Taro.getStorageSync('identityInfo')?.openid
+    const use_id = Taro.getStorageSync('identityInfo')?.openid || router?.params?.uid
     const info = Taro.getSystemInfoSync()
     const outline = Taro.getStorageSync('outline')
     report({
@@ -105,7 +105,7 @@ export default () => {
     const obj = getReportParam()
     const p = {
       event: 'Click',
-      button_name: type ? '创造我的穿越剧本' : '返回大纲生成页',
+      button_name: type ? '创造我的穿越剧本' : '重启穿越之旅',
       ...obj,
       ...(type ? content.params : {story_length: contentHasWrite.length})
     }
