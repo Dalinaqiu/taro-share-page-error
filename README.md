@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 16:07:03
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-07-31 15:15:27
+ * @LastEditTime: 2024-09-02 16:59:31
  * @FilePath: /ai-writer-miniprogram/README.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -39,3 +39,7 @@ npm run build:h5
 **注意**
 目前不支持动态区分环境，上线时需在·/src/utils/config.ts·中注释切换接口环境地址
 
+## 5 分支管理
+main分支是基准分支，版本分支请基于main分支创建。
+小程序目前分为两个大版本，分别通过main_1.0.0和main_2.0.0维护，后续新加大版本会增加main_3.0.0分支，以此类推。
+功能分支请基于对应版本分支创建，命名规则：feat_版本号_功能描述，例如：feat_1.0.0_add-user-login，功能分支开发完成后，请合并到版本分支。
