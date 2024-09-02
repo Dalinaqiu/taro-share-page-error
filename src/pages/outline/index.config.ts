@@ -1,3 +1,5 @@
 export default definePageConfig({
-  navigationBarTitleText: ''
+  navigationBarTitleText: '',
+  enableShareAppMessage: true,
+  enableShareTimeline: false
 })
