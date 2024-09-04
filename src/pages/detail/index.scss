@@ -45,4 +45,14 @@
       height: 100%;
     }
   }
+
+  .at-button--primary, .at-button__wxbutton {
+    color: #FFF;
+    border: 1PX solid #000000 !important;
+    background: #000000 !important;
+  }
+  
+  .at-button--normal {
+    border-color: grey !important;
+  }
 }
