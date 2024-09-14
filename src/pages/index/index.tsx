@@ -42,11 +42,7 @@ export default function Index() {
   })
 
   // 分享朋友圈回调
-  useShareTimeline((res) => {
-    if (res.from === 'button') {
-      // 来自页面内转发按钮
-      // console.log(res.target)
-    }
+  useShareTimeline(() => {
     return {
       title: SHARE_TITLE,
       path: '/pages/index/index',
@@ -97,6 +93,39 @@ export default function Index() {
 
   // 获取用户登录信息
   const getUserIdentity = () => {
+    const token = Taro.getStorageSync('token')
+    const identityInfo = Taro.getStorageSync('identityInfo')
+    if (!identityInfo) {
+      const params = {
+        jsCode: token,
+      }
+      request({
+        url: '/submit/wechat/getUserInfo',
+        payload: params,
+        method: 'POST',
+        success: (res) => {
+          // 将 openid 存储起来
+          Taro.setStorageSync('identityInfo', {
+            openid: res?.data?.openid,
+            unionid: res?.data?.unionid,
+          })
+
+          const info = Taro.getSystemInfoSync()
+
+           // 埋点
+          report({
+            event: 'PageView',
+            use_id: res?.data?.openid,
+            client: info.system,
+            page_name: '剧本设置页',
+            minicode: 1
+          })
+        },
+      })
+    }
+    else {
+
+    }
     Taro.login({
       success(res) {
         if (res.code) {
@@ -116,12 +145,13 @@ export default function Index() {
 
               const info = Taro.getSystemInfoSync()
 
-               // 埋点
+              // 埋点
               report({
                 event: 'PageView',
                 use_id: res?.data?.openid,
                 client: info.system,
-                page_name: '剧本设置页'
+                page_name: '剧本设置页',
+                minicode: 1
               })
             },
           })
@@ -245,6 +275,7 @@ export default function Index() {
       event: 'Click',
       use_id: use_id,
       client: info.system,
+      minicode: 1
     })
   }
 
@@ -285,7 +316,7 @@ export default function Index() {
     setTemplateData(obj)
   }
 
-  useLoad(() => {
+  useEffect(() => {
     Taro.showLoading({
       title: '加载中',
     })
@@ -299,10 +330,10 @@ export default function Index() {
 
     if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
       getUserIdentity()
-      const d = Taro.getSystemInfoSync()
-      console.log(d, 'ddd')
+      // const d = Taro.getSystemInfoSync()
+      // console.log(d, 'ddd')
     }
-  })
+  }, [])
 
   // useDidHide(() => {
   //   console.log('useDidHide')

@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 09:26:14
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-07-09 14:24:40
+ * @LastEditTime: 2024-09-13 14:37:07
  * @FilePath: /ai-writer-miniprogram/src/app.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -10,16 +10,61 @@ import React, { PropsWithChildren } from 'react'
 import Taro, { useLaunch } from '@tarojs/taro'
 import withWeapp, { cacheOptions } from "@tarojs/with-weapp";
 import { Block } from "@tarojs/components";
+import { login } from './utils'
 
 import "./app.scss";
 
 //app.js
 cacheOptions.setOptionsToCache({
-  // onLaunch: function () {
-  //   this.checkForUpdate()
-  // },
+  onLaunch: function () {
+    // if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP && !Taro.getStorageSync('token')) {
+    //   Taro.login({
+    //     success(res) {
+    //       if (res.code) {
+    //         const params = {
+    //           code: res.code,
+    //         }
+    //         // TODO: 登录
+    //         login(params).then(d => {
+    //           Taro.setStorageSync('token', d.data.token)
+    //         })
+    //       } else {
+    //         console.log('登录失败', res.errMsg)
+    //       }
+    //     },
+    //   })
+    // }
+  },
   onShow: function () {
     this.checkForUpdate();
+    // this.checkSession();
+  },
+  // 检查session是否过期
+  checkSession: function () {
+    Taro.checkSession({
+      success: function (res) {
+        console.log('checkSession success', res)
+      },
+      fail: function (res) {
+        // TODO: 重新登录
+        Taro.login({
+          success(res) {
+            if (res.code) {
+              const params = {
+                code: res.code,
+              }
+              // TODO: 登录
+              login(params).then(d => {
+                Taro.setStorageSync('token', d.data.token)
+              })
+            } else {
+              console.log('登录失败', res.errMsg)
+            }
+          },
+        })
+        console.log('checkSession fail', res)
+      }
+    })
   },
   // 检查是否有新版本
   checkForUpdate: function () {
@@ -63,6 +108,7 @@ cacheOptions.setOptionsToCache({
 });
 @withWeapp(cacheOptions.getOptionsFromCache(), true)
 class App extends React.Component {
+
   render() {
     return this.props.children;
   }

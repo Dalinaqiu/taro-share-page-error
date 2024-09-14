@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 15:29:36
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-08-01 17:55:51
+ * @LastEditTime: 2024-09-14 09:57:47
  * @FilePath: /td-test/src/pages/detail/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -45,6 +45,7 @@ export default () => {
       client: info.system,
       outline_content: outline,
       story_title: content.title,
+      minicode: 1
     })
   }
 
@@ -185,6 +186,7 @@ export default () => {
       const info = Taro.getSystemInfoSync()
       const { outlineId, uid, scriptId } = router?.params || {}
       report({
+        minicode: 1,
         client: info.system,
         event: 'Slide2',
         use_id: uid,
@@ -201,6 +203,7 @@ export default () => {
       const info = Taro.getSystemInfoSync()
       const { outlineId, uid, scriptId } = router?.params || {}
       report({
+        minicode: 1,
         client: info.system,
         event: 'Slide1',
         use_id: uid,
@@ -217,6 +220,7 @@ export default () => {
       const info = Taro.getSystemInfoSync()
       const { outlineId, uid, scriptId } = router?.params || {}
       report({
+        minicode: 1,
         client: info.system,
         event: 'Slide3',
         use_id: uid,
@@ -257,6 +261,7 @@ export default () => {
     const use_id = Taro.getStorageSync('identityInfo')?.openid || uid
     const info = Taro.getSystemInfoSync()
     report({
+      minicode: 1,
       event: 'PageView',
       page_name: type ? '被分享页' : '剧本生成页',
       use_id: use_id,

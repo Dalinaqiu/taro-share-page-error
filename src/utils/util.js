@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-08 17:02:20
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-08-01 10:34:32
+ * @LastEditTime: 2024-09-12 18:32:12
  * @FilePath: /ai-writer-miniprogram/src/utils/util.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -81,10 +81,46 @@ export const getTitle = () => {
     : SHARE_TITLE;
 }
 
+export const transParams = (params) => {
+  let ret = Object.keys(params).map((key) => {
+    return [key, params[key]].join("=")
+  }).join("&")
+  // ret = encodeURI(ret)
+  return ret
+}
+
+export const handleResponse = res => {
+  if (res.status === 200 && res.data.code === 0) {
+    return res.data
+  }
+  else {
+    if (res.data.msg === '参数丢失') {
+      return Promise.reject(res)
+    }
+    Taro.showToast({
+      title: res.data.msg,
+      icon: 'none',
+    })
+    console.error('参数错误', res)
+    return Promise.reject(res)
+  }
+}
+
+const handleResponseNoToast = res => {
+  if (res.status === 200 && res.data.code === 0) {
+    return res.data
+  }
+  else {
+    return Promise.reject(res)
+  }
+}
+
 export default {
   formatTime,
   isUrl,
   filterEmoji,
   objToQueryString,
   genReportUrl,
+  handleResponse,
+  handleResponseNoToast,
 }
