@@ -7,7 +7,7 @@ import { AtForm, AtButton, AtList, AtListItem, AtInput } from 'taro-ui'
 import Taro from '@tarojs/taro';
 import { getCross, transParams, report, validateOutlineParams } from '@/utils/index'
 import { useRouter, getCurrentInstance } from '@tarojs/taro'
-import { request, wx_request } from '../../utils/request.js'
+import { request, wx_request } from '../../../utils/request.js'
 // import { templateConfig } from '@/mock/template-index.js'
 import BackgroundImg from '@/images/icons/img_v3_02da_4184cea9-296c-40af-8477-99bb40dfd99g.jpg'
 import { SHARE_TITLE } from '@/utils/util.js'

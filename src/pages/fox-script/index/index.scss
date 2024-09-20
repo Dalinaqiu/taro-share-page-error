@@ -9,10 +9,6 @@
   height: 90%;
   font-size: 32px;
 
-  &-box {
-    // flex: 1;
-  }
-
   &-p {
     display: block;
     font-size: 40px;
@@ -38,23 +34,8 @@
     }
   }
 
-
-  &-book {
-    // width: 60%;
-  }
-
   &-book {
     margin-right: 10px;
-  }
-
-  &-characters {
-    // width: 25%;
-  }
-
-  &-button {
-    // position: absolute;
-    // bottom: 5%;
-    // width: 90%;
   }
 
   &-fab {

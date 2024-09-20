@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-09-12 18:09:25
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-09-12 18:21:50
+ * @LastEditTime: 2024-09-20 11:17:39
  * @FilePath: /ai-writer-miniprogram/src/utils/hljb.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -23,7 +23,7 @@ export const getScript = (data: Record<string, unknown>) => axios.post(`${prefix
 
 
 // 获取剧本
-export const getScriptList = (data: { uid: string; outline_id: string; script_id: string }) => axios.get(`${prefixUrl}/script?uid=${data.uid}&outline_id=${data.outline_id}&script_id=${data.script_id}`).then(res => handleResponse(res))
+export const getScriptList = (data: { outline_id: string | number; script_id: string | number }) => axios.get(`${prefixUrl}/script?outline_id=${data.outline_id}&script_id=${data.script_id}`).then(res => handleResponse(res))
 
 // 行为上报
 export const report = (data: Record<string, unknown>) => axios.post(`${BASE_REPORT_URL}/report`, data)

@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-09 17:49:55
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-07-23 09:50:28
+ * @LastEditTime: 2024-09-19 10:08:56
  * @FilePath: /ai-writer-miniprogram/src/pages/index/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -14,7 +14,7 @@ import { AtForm, AtButton, AtList, AtListItem, AtInput } from 'taro-ui'
 import Taro from '@tarojs/taro';
 import { getCross, transParams } from '@/utils/index'
 import { useRouter, getCurrentInstance } from '@tarojs/taro'
-import { request, wx_request } from '../../utils/request.js'
+import { request, wx_request } from '../../../utils/request.js'
 
 import './index.scss'
 

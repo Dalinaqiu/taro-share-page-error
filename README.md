@@ -1,8 +1,8 @@
 <!--
  * @Author: liqiu qiuli@sohu-inc.com
- * @Date: 2024-07-01 16:07:03
+ * @Date: 2024-08-06 15:08:04
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-09-02 16:59:31
+ * @LastEditTime: 2024-09-19 14:24:31
  * @FilePath: /ai-writer-miniprogram/README.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -10,6 +10,16 @@
 
 ## 简介
 AI 创作小程序，基于[Taro](https://docs.taro.zone/en/docs/)框架开发，支持多端发布。
+目前包含胡来剧本、生物盲盒、名著怼人、灵感剧场4部分。
+| 功能模块       | 对应文件夹路径                            |
+|----------------|----------------------------------------|
+| 首页          | src/pages/first-page                    |
+| 胡来剧本       | src/pages/fox-script                    |
+| 生物盲盒       | src/pages/animal-box                    |
+| 名著怼人       | src/pages/book-oppose                   |
+| 灵感剧场       | src/pages/inspiration-theater           |
+| 客服模块       | src/pages/consult                       |
+
 
 服务器node版本：20.9.0，建议本地开发环境使用此版本
 

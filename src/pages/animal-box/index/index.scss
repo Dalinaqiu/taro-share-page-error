@@ -1,0 +1,72 @@
+@import "~taro-ui/dist/style/components/input.scss";
+@import "~taro-ui/dist/style/components/list.scss";
+@import "~taro-ui/dist/style/components/button.scss";
+
+
+.animal-box {
+  background-image: url('../../../images/animal-box-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 0 5vw 10vh 5vw;
+  height: 100vh;
+
+  &-label {
+    font-family: MaokenAssortedSans;
+    font-size: 5vw;
+    font-weight: 500;
+    line-height: normal;
+    display: block;
+    color: #FFF;
+    margin-bottom: 2vh;
+  }
+
+  .at-list,
+  &-input {
+    height: 7vh;
+    margin: 3vh 0;
+    border-radius: 10px;
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.5);
+    box-sizing: border-box;
+    border: 1px solid #FFFFFF;
+    padding-left: 5vw;
+
+    &-placeholder {
+      opacity: 1;
+      font-family: MaokenAssortedSans;
+      font-weight: 500;
+      line-height: normal;
+      letter-spacing: 0em;
+      font-variation-settings: "opsz" auto;
+      color: #888;
+    }
+  }
+
+  .at-list__item {
+    &::after {
+      border: none;
+    }
+
+    .at-list__item-extra {
+      left: -53vw;
+      opacity: 1;
+      font-family: MaokenAssortedSans;
+      font-weight: 500;
+      line-height: normal;
+      letter-spacing: 0em;
+      font-variation-settings: "opsz" auto;
+      color: #888;
+    }
+  }
+
+  &-button {
+    font-family: MaokenAssortedSans;
+    margin-top: 10vh;
+    background: #FB963F;
+    border-radius: 10px;
+    opacity: 1;
+    width: 60%;
+  }
+
+}

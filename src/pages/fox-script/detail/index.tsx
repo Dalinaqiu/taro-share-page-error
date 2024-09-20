@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 15:29:36
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-09-14 09:57:47
+ * @LastEditTime: 2024-09-20 11:19:03
  * @FilePath: /td-test/src/pages/detail/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -63,14 +63,10 @@ export default () => {
     }
   })
 
-  useShareTimeline((res) => {
+  useShareTimeline(() => {
     const { outlineId = '', uid = '' } = router?.params || {}
     const title = getTitle()
 
-    if (res.from === 'button') {
-      // 来自页面内转发按钮
-      console.log(res.target)
-    }
     return {
       title,
       query: `outlineId=${outlineId}&scriptId=${content.id}&uid=${uid}&type=share`,
@@ -133,7 +129,7 @@ export default () => {
   // 保存
   const goSave = () => {
     const { outlineId, uid } = router?.params || {}
-    getSharePic({script_id: content.id, outline_id: parseInt(outlineId), uid}).then(d => {
+    outlineId && getSharePic({script_id: content.id, outline_id: parseInt(outlineId), uid}).then(d => {
       console.log(d)
       Taro.previewImage({
         enablesavephoto: true,
@@ -182,14 +178,11 @@ export default () => {
         twoThird: true,
       })
 
-      const use_id = Taro.getStorageSync('identityInfo')?.openid
       const info = Taro.getSystemInfoSync()
-      const { outlineId, uid, scriptId } = router?.params || {}
       report({
         minicode: 1,
         client: info.system,
         event: 'Slide2',
-        use_id: uid,
         ...(type ? content.params : {})
       })
     } else if (scrollTop + clientHeight >= oneThird && !third.oneThird) {
@@ -199,14 +192,11 @@ export default () => {
         oneThird: true,
       })
 
-      const use_id = Taro.getStorageSync('identityInfo')?.openid
       const info = Taro.getSystemInfoSync()
-      const { outlineId, uid, scriptId } = router?.params || {}
       report({
         minicode: 1,
         client: info.system,
         event: 'Slide1',
-        use_id: uid,
         ...(type ? content.params : {})
       })
     } else if (scrollTop + clientHeight > scrollHeight && !third.all) {
@@ -216,33 +206,23 @@ export default () => {
       })
       console.log('已滚动到最后');
 
-      const use_id = Taro.getStorageSync('identityInfo')?.openid
       const info = Taro.getSystemInfoSync()
-      const { outlineId, uid, scriptId } = router?.params || {}
       report({
         minicode: 1,
         client: info.system,
         event: 'Slide3',
-        use_id: uid,
         ...(type ? content.params : {})
       })
     }
   }
 
   useEffect(() => {
-    // const data = Taro.getLaunchOptionsSync();
-    // type.value = data?.scene === 1154;
-    // //开启分享
-    // Taro.showShareMenu({
-    //   withShareTicket: true,
-    // })
-    const { outlineId, uid, scriptId, type = '' } = router?.params || {}
+    const { outlineId, scriptId, type = '' } = router?.params || {}
     Taro.showLoading({
       title: '加载中',
     })
     if (type === 'share') {
-      getScriptList({
-        uid,
+      outlineId && scriptId && getScriptList({
         outline_id: parseInt(outlineId),
         script_id: parseInt(scriptId)
       }).then(d => {
@@ -250,48 +230,22 @@ export default () => {
       }).finally(() => Taro.hideLoading())
     }
     else {
-      getScript({
-        outline_id: parseInt(outlineId),
-        uid,
+      outlineId && getScript({
+        outline_id: parseInt(outlineId)
       }).then(d => {
         setContent(d.data)
       }).finally(() => Taro.hideLoading())
     }
 
-    const use_id = Taro.getStorageSync('identityInfo')?.openid || uid
     const info = Taro.getSystemInfoSync()
     report({
       minicode: 1,
       event: 'PageView',
       page_name: type ? '被分享页' : '剧本生成页',
-      use_id: use_id,
       client: info.system,
       ...(type ? content.params : {})
     })
   }, [])
-
-  // useDidHide(() => {
-  //   console.log('useDidHide')
-  //   // Taro.removeStorage({key: 'pageState'})
-  //   const use_id = Taro.getStorageSync('identityInfo')?.openid
-  //   const info = Taro.getSystemInfoSync()
-  //   const templateData = Taro.getStorageSync('pageState')
-  //   const outline = Taro.getStorageSync('outline')
-  //   const obj = {}
-  //   Object.keys(templateData).forEach(key => {
-  //     obj[key] = templateData[key].label
-  //   })
-  //   report({
-  //     ...obj,
-  //     event: 'Exit',
-  //     use_id: use_id,
-  //     client: info.system,
-  //     page_name: '剧本生成页',
-  //     outline_content: outline,
-  //     story_title: content.title,
-  //     story_length: contentHasWrite.length || content.script.length,
-  //   })
-  // })
 
   const isShowShared = () => {
     return Taro.getEnv() === Taro.ENV_TYPE.WEAPP && !type

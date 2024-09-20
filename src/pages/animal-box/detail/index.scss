@@ -1,0 +1,81 @@
+@import "~taro-ui/dist/style/components/button.scss";
+.animal-box-detail {
+  background-image: url('../../../images/animal-box-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 10vh 5vw 10vh 5vw;
+  height: 100vh;
+  font-family: MaokenAssortedSans;
+
+  &-img {
+    height: 10vh;
+    width: 50vw;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &-content {
+    padding: 0 3vw;
+    &-name {
+      color: #fff;
+      display: block;
+      font-size: 6vw;
+      font-family: MaokenAssortedSans;
+      margin: 10vh 0 5vh 0;
+    }
+
+    &-content {
+      color: #fff;
+      display: block;
+      font-size: 4.5vw;
+      font-family: MaokenAssortedSans;
+      line-height: 60px;
+      white-space: normal;
+
+      .h5-p {
+        display: inline-block;
+        color: #FB963F;
+        font-size: 5vw;
+      }
+    }
+  }
+
+  &-btn {
+    display: flex;
+    margin-top: 10vh;
+
+    .at-button {
+      height: 5vh;
+      color: #fff;
+      border-radius: 10px;
+      opacity: 1;
+      background: rgba(255, 255, 255, 0.5);
+
+      &__text {
+        align-items: center;
+        display: inline-flex;
+      }
+    }
+
+    
+    .animal-box-detail-btn-orange {
+      background: #FB963F !important;
+    }
+  }
+
+  &-rendering {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 60vh;
+    opacity: 1;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0em;
+    font-variation-settings: "opsz" auto;
+    color: #FFFFFF;
+  }
+}

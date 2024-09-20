@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 11:44:15
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-09-14 09:55:32
+ * @LastEditTime: 2024-09-20 11:15:12
  * @FilePath: /td-test/src/pages/outline/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -67,11 +67,9 @@ export default () => {
 
   // 上报接口
   const domReport = (d) => {
-    const use_id = Taro.getStorageSync('identityInfo')?.openid || router?.params?.uid
     const info = Taro.getSystemInfoSync()
     report({
       ...d,
-      use_id: use_id,
       client: info.system,
       minicode: 1
     })
@@ -140,13 +138,11 @@ export default () => {
   };
 
   const goDetail = () => {
-    const use_id = Taro.getStorageSync('identityInfo')?.openid
-    if (!use_id || !outlineId) {
+    if (!outlineId) {
       return
     }
     checkScript({
-      outline_id: outlineId,
-      uid: use_id
+      outline_id: outlineId
     }).then(d => {
       // 次数用尽
       if (d.data.count) {
@@ -157,7 +153,7 @@ export default () => {
       else {
         // 还有次数
         Taro.navigateTo({
-          url: `/pages/detail/index?outlineId=${outlineId}&uid=${use_id}`,
+          url: `/pages/detail/index?outlineId=${outlineId}`,
         })
       }
     })
@@ -189,8 +185,7 @@ export default () => {
     const params = router?.params.uid
       ? router?.params 
       : {
-          ...getReportParam(),
-          uid: Taro.getStorageSync('identityInfo')?.openid
+          ...getReportParam()
         };
     Taro.showLoading({
       title: '加载中',
@@ -230,26 +225,6 @@ export default () => {
     }
     
   }, [])
-
-  // useDidHide(() => {
-  //   console.log('useDidHide')
-  //   // Taro.removeStorage({key: 'pageState'})
-  //   const use_id = Taro.getStorageSync('identityInfo')?.openid
-  //   const info = Taro.getSystemInfoSync()
-  //   const templateData = Taro.getStorageSync('pageState')
-  //   const obj = {}
-  //   Object.keys(templateData).forEach(key => {
-  //     obj[key] = templateData[key].label
-  //   })
-  //   report({
-  //     ...obj,
-  //     event: 'Exit',
-  //     use_id: use_id,
-  //     client: info.system,
-  //     page_name: '大纲生成页',
-  //     outline_content: value
-  //   })
-  // })
   
   return (
     <View className={prefix}>
