@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 11:44:15
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-09-20 11:15:12
+ * @LastEditTime: 2024-09-22 10:13:31
  * @FilePath: /td-test/src/pages/outline/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -111,7 +111,7 @@ export default () => {
 
     return {
       title: SHARE_TITLE,
-      path: `/pages/index/index?outlineId=${outlineId}&uid=${uid}&type=share`,
+      path: `/fox-script/pages/index/index?outlineId=${outlineId}&uid=${uid}&type=share`,
       imageUrl: BackgroundImg
     }
   })
@@ -132,7 +132,7 @@ export default () => {
     }
     else {
       Taro.navigateTo({
-        url: '/pages/index/index?back=outline',
+        url: '/fox-script/pages/index/index?back=outline',
       })
     }
   };
@@ -153,7 +153,7 @@ export default () => {
       else {
         // 还有次数
         Taro.navigateTo({
-          url: `/pages/detail/index?outlineId=${outlineId}`,
+          url: `/fox-script/pages/detail/index?outlineId=${outlineId}`,
         })
       }
     })
@@ -213,7 +213,7 @@ export default () => {
     console.log(router?.params, 'router?.params====>')
     if (router?.params.from) {
       Taro.navigateTo({
-        url: `/pages/index/index?type=share`,
+        url: `/fox-script/pages/index/index?type=share`,
       })
     }
     else {

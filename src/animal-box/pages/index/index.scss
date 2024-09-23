@@ -9,7 +9,7 @@
   background-position: center;
   background-repeat: no-repeat;
   padding: 0 5vw 10vh 5vw;
-  height: 100vh;
+  height: 90vh;
 
   &-label {
     font-family: MaokenAssortedSans;
@@ -49,7 +49,7 @@
     }
 
     .at-list__item-extra {
-      left: -53vw;
+      right: 44vw;
       opacity: 1;
       font-family: MaokenAssortedSans;
       font-weight: 500;
@@ -57,6 +57,7 @@
       letter-spacing: 0em;
       font-variation-settings: "opsz" auto;
       color: #888;
+      max-width: 40vw;
     }
   }
 

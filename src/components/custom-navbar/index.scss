@@ -1,0 +1,29 @@
+// src/components/CustomNavbar/index.scss
+.custom-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  border-bottom: 1px solid #eee;
+  height: 70px;
+  padding-left: 20px;
+
+  .title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .image {
+    height: 3vh;
+    width: 3vh;
+
+    &:first-child {
+      margin-right: 2vh;
+    }
+  }
+}

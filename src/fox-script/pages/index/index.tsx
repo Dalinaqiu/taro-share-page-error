@@ -36,7 +36,7 @@ export default function Index() {
     }
     return {
       title: SHARE_TITLE,
-      path: '/pages/index/index',
+      path: '/fox-script/pages/index/index',
       imageUrl: BackgroundImg
     }
   })
@@ -45,7 +45,7 @@ export default function Index() {
   useShareTimeline(() => {
     return {
       title: SHARE_TITLE,
-      path: '/pages/index/index',
+      path: '/fox-script/pages/index/index',
       imageUrl: BackgroundImg
     }
   })
@@ -251,7 +251,7 @@ export default function Index() {
       })
 
       return Taro.navigateTo({
-        url: `/pages/outline/index?${transParams(params)}`,
+        url: `/fox-script/pages/outline/index?${transParams(params)}`,
       })
     })
   }
@@ -496,81 +496,4 @@ export default function Index() {
       </View>
     </View>
   )
-
-  // return (
-  //   <View className={prefix}>
-  //     <View className={`${prefix}-box`}>
-  //       <Text className={`${prefix}-p`}>
-  //         时空行者
-  //       </Text>
-  //       <View className={`${prefix}-select`}>
-  //         <View className={`${prefix}-book`}>
-  //           <Picker
-  //             mode='multiSelector'
-  //             value={state.book.value}
-  //             range={[
-  //               bookOptions.map(item => item.label),
-  //               charactersOptions.map(item => item.label)
-  //             ]}
-  //             onChange={e => onConfirm(e.detail, 'book')}
-  //             onColumnChange={e => onColumnChange(e)}
-  //           >
-  //             <AtList title='书名A' name='book'>
-  //               <AtListItem title={state.book.label ? '' : '请选择穿越的作品'} extraText={state.book.label} />
-  //             </AtList>
-  //           </Picker>
-  //         </View>
-
-  //         <View className={`${prefix}-character`}>
-  //           <Picker
-  //             value={state.character.value}
-  //             mode='multiSelector'
-  //             range={[
-  //               bookOptions.map(item => item.label),
-  //               charactersOptions.map(item => item.label)
-  //             ]}
-  //             onChange={e => onConfirm(e.detail, 'character')}
-  //             onColumnChange={onColumnChange}
-  //           >
-  //             <AtList title='书名A' name='character'>
-  //               <AtListItem title={state.character.label ? '' : '人物'} extraText={state.character.label} />
-  //             </AtList>
-  //           </Picker>
-  //         </View>
-  //       </View>
-
-  //       <Text className={`${prefix}-p`}>
-  //         时空之门
-  //       </Text>
-  //       <View className={`${prefix}-world`}>
-  //         <Picker
-  //           mode='selector'
-  //           value={state.world.value}
-  //           range={cross.map(item => item.label)}
-  //           onChange={e => onConfirm(e.detail, 'world')}
-  //         >
-  //           <AtList title='书名A' name='book'>
-  //             <AtListItem title={state.world.label ? '' : '请选择你想去的世界'} extraText={state.world.label} />
-  //           </AtList>
-  //         </Picker>
-  //       </View>
-
-  //       <Text className={`${prefix}-p`}>
-  //         时空轨迹
-  //       </Text>
-  //       <View className={`${prefix}-type`}>
-  //         <Picker
-  //           mode='selector'
-  //           value={state.type.value}
-  //           range={typeOptions.map(item => item.label)}
-  //           onChange={e => onConfirm(e.detail, 'type')}
-  //         >
-  //           <AtList title='书名A' name='book'>
-  //             <AtListItem title={state.type.label ? '' : '你想来一场怎样的冒险'} extraText={state.type.label} />
-  //           </AtList>
-  //         </Picker>
-  //       </View>
-  //     </View>
-  //   </View>
-  // )
 }

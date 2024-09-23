@@ -5,8 +5,9 @@
   background-position: center;
   background-repeat: no-repeat;
   padding: 10vh 5vw 10vh 5vw;
-  height: 100vh;
+  height: 80vh;
   font-family: MaokenAssortedSans;
+  overflow-y: auto;
 
   &-img {
     height: 10vh;
@@ -34,7 +35,7 @@
       line-height: 60px;
       white-space: normal;
 
-      .h5-p {
+      .h5-Text {
         display: inline-block;
         color: #FB963F;
         font-size: 5vw;
@@ -63,6 +64,14 @@
     .animal-box-detail-btn-orange {
       background: #FB963F !important;
     }
+
+    .isLoading {
+      opacity: 0.5;
+      background: rgba(255, 255, 255, 0.5);
+      box-sizing: border-box;
+      border: 1px solid #FFFFFF;
+      backdrop-filter: blur(10px);
+    }
   }
 
   &-rendering {
@@ -72,6 +81,7 @@
     text-align: center;
     height: 60vh;
     opacity: 1;
+    font-size: 4.5vw;
     font-weight: 500;
     line-height: normal;
     letter-spacing: 0em;

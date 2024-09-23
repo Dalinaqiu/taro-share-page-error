@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 15:29:36
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-09-20 11:19:03
+ * @LastEditTime: 2024-09-22 10:14:18
  * @FilePath: /td-test/src/pages/detail/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -59,7 +59,7 @@ export default () => {
     
     return {
       title,
-      path: `/pages/detail/index?outlineId=${outlineId}&scriptId=${content.id}&uid=${uid}&type=share`,
+      path: `/fox-script/pages/detail/index?outlineId=${outlineId}&scriptId=${content.id}&uid=${uid}&type=share`,
     }
   })
 
@@ -70,7 +70,7 @@ export default () => {
     return {
       title,
       query: `outlineId=${outlineId}&scriptId=${content.id}&uid=${uid}&type=share`,
-      path: `/pages/detail/index?outlineId=${outlineId}&scriptId=${content.id}&uid=${uid}&type=share`,
+      path: `/fox-script/pages/detail/index?outlineId=${outlineId}&scriptId=${content.id}&uid=${uid}&type=share`,
     }
   })
 
@@ -95,7 +95,7 @@ export default () => {
     }
     else {
       Taro.navigateTo({
-        url: '/pages/index/index?back=detail',
+        url: '/fox-script/pages/index/index?back=detail',
       })
     }
 
@@ -130,7 +130,6 @@ export default () => {
   const goSave = () => {
     const { outlineId, uid } = router?.params || {}
     outlineId && getSharePic({script_id: content.id, outline_id: parseInt(outlineId), uid}).then(d => {
-      console.log(d)
       Taro.previewImage({
         enablesavephoto: true,
         enableShowPhotoDownload: true,
