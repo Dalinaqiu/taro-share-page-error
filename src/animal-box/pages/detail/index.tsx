@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-09-19 17:16:19
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-09-23 16:59:23
+ * @LastEditTime: 2024-09-23 17:30:34
  * @FilePath: /ai-writer-miniprogram/src/pages/animal-box/detail/index.tsx
  * @Description: 详情页或者转发页
  */
@@ -16,7 +16,7 @@ import AnimalBoxShare from "@/images/animal-box-share.png"
 import { marked } from 'marked'
 import { URL_FONT } from '@/utils/constant.js'
 import cx from 'classnames'
-import CustomNavbar from '@/components/custom-navbar'
+import CustomNavbar, { customHeight } from '@/components/custom-navbar'
 
 import './index.scss'
 
@@ -214,7 +214,7 @@ export default () => {
   }, [type, loading])
 
   return (
-    <View className={`${prefix}`}>
+    <View className={`${prefix}`}  style={{ marginTop: `${customHeight}px`}}>
       <CustomNavbar />
       {
         type === 'inner' ? <></> : <Image className={`${prefix}-img`} src={AnimalBoxDetailTitle} />

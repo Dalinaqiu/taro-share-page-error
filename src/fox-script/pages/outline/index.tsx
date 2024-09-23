@@ -1,9 +1,9 @@
 /*
  * @Author: liqiu qiuli@sohu-inc.com
- * @Date: 2024-07-01 11:44:15
+ * @Date: 2024-09-23 17:22:32
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-09-22 10:13:31
- * @FilePath: /td-test/src/pages/outline/index.tsx
+ * @LastEditTime: 2024-09-23 17:50:41
+ * @FilePath: /ai-writer-miniprogram/src/fox-script/pages/outline/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 
@@ -16,6 +16,7 @@ import { getOutline, checkScript, refreshCount, report } from "@/utils/index";
 import CustomModal from "@/components/custom-modal";
 import { getTitle, SHARE_TITLE } from '@/utils/util.js';
 import BackgroundImg from '@/images/icons/img_v3_02da_4184cea9-296c-40af-8477-99bb40dfd99g.jpg'
+import CustomNavbar, { customHeight } from '@/components/custom-navbar'
 
 import './index.scss';
 
@@ -227,7 +228,8 @@ export default () => {
   }, [])
   
   return (
-    <View className={prefix}>
+    <View className={prefix}  style={{ marginTop: `${customHeight}px`}}>
+      <CustomNavbar />
       <Text className={`${prefix}-p`}>
         穿越蓝图
       </Text>

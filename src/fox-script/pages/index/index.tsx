@@ -11,6 +11,7 @@ import { request, wx_request } from '../../../utils/request.js'
 // import { templateConfig } from '@/mock/template-index.js'
 import BackgroundImg from '@/images/icons/img_v3_02da_4184cea9-296c-40af-8477-99bb40dfd99g.jpg'
 import { SHARE_TITLE } from '@/utils/util.js'
+import CustomNavbar, { customHeight } from '@/components/custom-navbar'
 
 import './index.scss'
 
@@ -475,7 +476,8 @@ export default function Index() {
   }
 
   return (
-    <View className={prefix}>
+    <View className={prefix}  style={{ marginTop: `${customHeight}px`}}>
+      <CustomNavbar />
       <View className={`${prefix}-box`}>
         {renderTpl()}
       </View>

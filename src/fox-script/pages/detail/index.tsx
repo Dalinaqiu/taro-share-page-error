@@ -1,5 +1,13 @@
 /*
  * @Author: liqiu qiuli@sohu-inc.com
+ * @Date: 2024-09-23 17:22:32
+ * @LastEditors: liqiu qiuli@sohu-inc.com
+ * @LastEditTime: 2024-09-23 17:51:38
+ * @FilePath: /ai-writer-miniprogram/src/fox-script/pages/detail/index.tsx
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
+/*
+ * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 15:29:36
  * @LastEditors: liqiu qiuli@sohu-inc.com
  * @LastEditTime: 2024-09-22 10:14:18
@@ -15,6 +23,8 @@ import { getScript, getSharePic, report, getScriptList } from "@/utils/index";
 import { useEffect, useState, } from 'react'
 import Taro from '@tarojs/taro';
 import { getTitle } from '@/utils/util.js';
+import CustomNavbar, { customHeight } from '@/components/custom-navbar'
+
 import './index.scss'
 
 const prefix = 'detail'
@@ -257,8 +267,8 @@ export default () => {
   }
   
   return (
-    <View className={`${prefix}`}>
-      
+    <View className={`${prefix}`}  style={{ marginTop: `${customHeight}px`}}>
+      <CustomNavbar />
       <BookTitle title={content.title} />
       
       <BookReader

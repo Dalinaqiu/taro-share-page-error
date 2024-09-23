@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-09-19 14:31:52
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-09-23 16:59:08
+ * @LastEditTime: 2024-09-23 18:13:38
  * @FilePath: /ai-writer-miniprogram/src/pages/animal-box/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -14,7 +14,7 @@ import { useState, useEffect } from 'react'
 import AnimalBoxModal from '@/components/animal-box-model'
 import { setAdSuccess, check, reportParam } from '@/utils/swmh'
 import { URL_FONT } from '@/utils/constant.js'
-import CustomNavbar from '@/components/custom-navbar'
+import CustomNavbar, { customHeight } from '@/components/custom-navbar'
 
 import './index.scss'
 
@@ -119,7 +119,7 @@ export default () => {
   }, [])
 
   return (
-    <View className={`${prefix}`}>
+    <View className={`${prefix}`} style={{ marginTop: `${customHeight}px`}}>
       <CustomNavbar />
       {
         showModel && (
@@ -143,6 +143,7 @@ export default () => {
           ...data,
           appellation: e
         })}
+        cursor={-1}
         value={data.appellation}
       />
 
