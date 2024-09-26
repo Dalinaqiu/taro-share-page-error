@@ -2,7 +2,7 @@
  * @Author: liqiu qiuli@sohu-inc.com
  * @Date: 2024-07-01 09:26:14
  * @LastEditors: liqiu qiuli@sohu-inc.com
- * @LastEditTime: 2024-09-23 15:45:04
+ * @LastEditTime: 2024-09-26 10:38:33
  * @FilePath: /ai-writer-miniprogram/src/app.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -10,7 +10,6 @@ import React, { PropsWithChildren } from 'react'
 import Taro, { useLaunch } from '@tarojs/taro'
 import withWeapp, { cacheOptions } from "@tarojs/with-weapp";
 import { Block } from "@tarojs/components";
-import { login } from './utils'
 
 import "./app.scss";
 
@@ -34,6 +33,8 @@ cacheOptions.setOptionsToCache({
     //     },
     //   })
     // }
+    console.log('onLaunch')
+    
   },
   onShow: function () {
     this.checkForUpdate();
@@ -54,9 +55,7 @@ cacheOptions.setOptionsToCache({
                 code: res.code,
               }
               // TODO: 登录
-              login(params).then(d => {
-                Taro.setStorageSync('token', d.data.token)
-              })
+              
             } else {
               console.log('登录失败', res.errMsg)
             }
